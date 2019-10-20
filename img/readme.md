@@ -1,5 +1,10 @@
 ## Sources of images
 
+- face0.jpg - https://userstock.io/photo/356
+- face1.jpg - https://userstock.io/photo/19
+- face2.jpg - https://userstock.io/photo/12
+- face3.jpg - https://unsplash.com/photos/iFgRcqHznqg
+- face4.jpg - https://www.pexels.com/photo/beard-boy-eyeglasses-eyewear-576924/
 - clock.jpg - https://pixabay.com/photos/time-timer-clock-watch-hour-371226/
 - flag-for-china.png - https://emojipedia.org/flag-for-china/
 - flag-for-france.png - https://emojipedia.org/flag-for-france/
