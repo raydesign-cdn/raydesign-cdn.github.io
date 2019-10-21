@@ -15,6 +15,7 @@
 - flag-for-spain.png - https://emojipedia.org/flag-for-spain/
 - flag-for-united-arab-emirates.png - https://emojipedia.org/flag-for-united-arab-emirates/
 - flag-for-united-states.png - https://emojipedia.org/flag-for-united-states/
+- googleG.png - https://commons.wikimedia.org/wiki/File:Google_%22G%22_Logo.svg
 - news0.jpg - https://picjumbo.com/woman-enjoying-sun-during-morning-yoga/
 - news1.jpg - https://picjumbo.com/busy-street-in-venice-italy/
 - news2.jpg - https://picjumbo.com/san-francisco-cable-car-ride/
