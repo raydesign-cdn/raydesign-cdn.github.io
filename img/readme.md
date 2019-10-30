@@ -21,6 +21,7 @@
 - news1.jpg - https://picjumbo.com/busy-street-in-venice-italy/
 - news2.jpg - https://picjumbo.com/san-francisco-cable-car-ride/
 - news3.jpg - https://picjumbo.com/happy-girl-licking-chocolate-ice-cream-in-summer/
+- sheet_apple_64.png - https://github.com/iamcal/emoji-data
 - slide1.jpg - https://pixabay.com/photos/pier-jetty-ocean-sea-water-way-569314/
 - slide2.jpg - https://pixabay.com/photos/polynesia-french-polynesia-tahiti-3021072/
 - slide3.jpg - https://pixabay.com/photos/maldives-tropics-tropical-1993704/
