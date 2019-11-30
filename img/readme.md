@@ -2,6 +2,9 @@
 
 - 1280-office-1.jpg - https://pixabay.com/photos/office-paper-business-accounting-3309862/
 - cat.jpg - https://pixabay.com/photos/cat-small-red-mackerel-grass-4262976/
+- cat1.jpg - https://picjumbo.com/white-cat-in-her-arms/
+- cat2.jpg - https://picjumbo.com/cute-little-cat-at-home/
+- cat3.jpg - https://picjumbo.com/one-little-angry-cat/
 - clock.jpg - https://pixabay.com/photos/time-timer-clock-watch-hour-371226/
 - face0.jpg - https://userstock.io/photo/356
 - face1.jpg - https://userstock.io/photo/19
