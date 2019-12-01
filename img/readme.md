@@ -45,6 +45,6 @@
 - weatherBg.png - https://pixabay.com/vectors/sky-blue-clouds-mountains-dark-34536/
 - yoga1.jpg - https://picjumbo.com/fitness-girl-with-yoga-pilates-mat/
 - yoga2.jpg - https://picjumbo.com/fit-woman-stretching-her-body-before-her-morning-yoga/
-- yoga3.jpg - https://picjumbo.com/fit-woman-stretching-her-body-in-morning-yoga-routine/
+- yoga3.jpg - https://picjumbo.com/young-fitness-woman-overlooking-the-sea-in-the-morning/
 - yoga4.jpg - https://picjumbo.com/healthy-woman-preparing-for-her-morning-yoga-stretching-workout/
 - yoga5.jpg - https://picjumbo.com/woman-ready-to-start-morning-yoga/
