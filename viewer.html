@@ -1,22 +1,23 @@
+
 <style>
   html, body {
     margin: 0;
     height: 100%;
+    font-family:Arial;
   }
   main {
     position: relative;
     height: 100%;
-    overflow: auto;
     box-sizing: border-box;
-    margin-top: 0;
-    transition: margin-top .5s;
+    overflow: auto;
+    transition: transform .5s;
     --iframe-h: 600px;
     --sm-h: 600px;
     --sm-w: 360px;
     --md-w: 991px;
   }
   main.pulled {
-    margin-top: 20%;
+    transform: translate(0, 20%);
   }
   .container {
     border: 0;
@@ -52,10 +53,7 @@
     background: #242424;
   }
   #grid {
-    position: fixed;
-  }
-  main.pulled #grid {
-    position: absolute;
+    position: sticky;
   }
   #lines {
     position: absolute;
@@ -66,11 +64,15 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 1em;
+    padding: 0 1em;
+    font-size: .8em;
   }
   fieldset {
     border: 0;
     padding: 1em 0;
+  }
+  input[type="number"] {
+    width: 5em;
   }
   .resizerY {
     cursor: ew-resize;
@@ -79,8 +81,9 @@
     cursor: ns-resize;
   }
   #viewport {
-    position: relative;
-    padding: 100px 0 0 100px;
+    position: absolute;
+    top: 0;
+    padding: 100px 0 100px 100px;
     width: fit-content;
     min-width: 100%;
   }
@@ -90,15 +93,22 @@
     background: 0 0!important;
     display: none!important;
   }
-
 </style>
 
 <section id="setting">
-  <label>Viewport</label>
   <fieldset>
-    <label>Small</label>
+    <label>URL</label>
+    <input id="field-url" type="text" style="width:50%" />
+  </fieldset>
+  <fieldset>
+    <select id="field-select-size">
+      <option value='{"w":360,"h":600}' selected="true">small</option>
+      <option value='{"w":992,"h":600}'>medium</option>
+    </select>
     <input id="field-sm-w" type="number" /> x <input id="field-sm-h" type="number" />
-    <button id="btn-sm-default" data-default='{"w":360,"h":600}'>Default</button>
+    <button id="btn-sm-landscape">Landscape</button>
+    <button id="btn-sm-portrait">Portrait</button>
+    <button id="btn-sm-ruler">Ruler</button>
   </fieldset>
 </section>
 
@@ -106,8 +116,6 @@
 
   <!-- rulers -->
   <svg id="grid" xmlns="http://www.w3.org/2000/svg" version="1.1">
-
-    <line x1="1091"  y1="0" x2="1091"  y2="100%" style="stroke:red;stroke-opacity:1;" />
 
     <!-- grid lines -->
     <!--
@@ -225,18 +233,18 @@
     <svg id="lines" xmlns="http://www.w3.org/2000/svg" version="1.1">
 
       <!-- sm viewport lines -->
-      <line x1="0%"  y1="100" x2="100%"  y2="100" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
-      <line x1="100"  y1="0" x2="100"  y2="100%" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
-      <line id="line-sm-x" class="resizerX" x1="0%"  y1="600" x2="100%"  y2="600" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
-      <line id="line-sm-y" class="resizerY" x1="460"  y1="0" x2="460"  y2="100%" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
+      <line x1="0%"  y1="100" x2="100%"  y2="100" style="stroke-width:2px;stroke:red;stroke-opacity:.5;" />
+      <line x1="100"  y1="0" x2="100"  y2="100%" style="stroke-width:2px;stroke:red;stroke-opacity:.5;" />
+      <line id="line-sm-x" class="resizerX" x1="0%"  y1="600" x2="100%"  y2="600" style="stroke-width:2px;stroke:red;stroke-opacity:.5;" />
+      <line id="line-sm-y" class="resizerY" x1="460"  y1="0" x2="460"  y2="100%" style="stroke-width:2px;stroke:red;stroke-opacity:.5;" />
 
-      <text id="text-sm" x="120" y="80" style="fill:#FFFFFF;fill-opacity:0.5;font-family:Arial;font-size:1em;">?x?</text>
+      <text id="text-sm" x="120" y="90" style="fill:#FFFFFF;fill-opacity:0.5;font-family:Arial;font-size:.8em;">?x?</text>
     </svg>
 
     <div class="container small">
       <iframe id="iframe1" src=""></iframe>
     </div>
-    <!-- 
+    <!--
     <div class="container medium">
       <iframe id="iframe2" src=""></iframe>
     </div>
@@ -256,15 +264,23 @@
 </main>
 
 <script type="text/javascript">
+  const URL = 'https://ask-edge.simonho.workers.dev/home.html';
+
   let smResizeX = false;
   let smResizeY = false;
   let mainContent = document.getElementById('mainContent');
   let fieldsmhEl = document.getElementById('field-sm-h');
   let fieldsmwEl = document.getElementById('field-sm-w');
+  let fieldSelEl = document.getElementById('field-select-size');
+  let fieldUrl = document.getElementById('field-url');
   let linesmxEl = document.getElementById('line-sm-x');
   let linesmyEl = document.getElementById('line-sm-y');
   let textsmEl = document.getElementById('text-sm');
-  let btnsmDefaultEl = document.getElementById('btn-sm-default');
+  let btnsmRulerEl = document.getElementById('btn-sm-ruler');
+  let btnsmLandscapeEl = document.getElementById('btn-sm-landscape');
+  let btnsmPortraitEl = document.getElementById('btn-sm-portrait');
+  let iframes = document.querySelectorAll('iframe');
+  let oldURL = URL;
 
   function setLines(x, y) {
     x = Number(x) + 100;
@@ -284,30 +300,31 @@
     textsmEl.innerHTML = `${smWidth} x ${smHeight}`;
   }
 
-  const URL = 'http://localhost:3000/question.html';
-
-  let iframes = document.querySelectorAll('iframe');
-  iframes.forEach(el => {
-    el.setAttribute('src', URL);
-  });
+  // main start
+  iframes.forEach(el => el.setAttribute('src', fieldUrl.value = URL));
 
   smSetViewport();
   setLines(fieldsmwEl.value, fieldsmhEl.value);
 
+  // events setup
   window.addEventListener('click', e => {
     if (e.ctrlKey) {
       mainContent.classList.toggle('pulled');
+      if (fieldUrl.value != oldURL) {
+        oldURL = fieldUrl.value;
+        iframes.forEach(el => el.setAttribute('src', fieldUrl.value));
+      }
     }
   });
 
   window.addEventListener('mousemove', e => {
     if (smResizeX) {
-      mainContent.style.setProperty('--sm-w', (e.clientX - 100) + 'px');
-      setLines(e.clientX - 100, fieldsmhEl.value);
+      mainContent.style.setProperty('--sm-w', (e.clientX - 100 + mainContent.scrollLeft) + 'px');
+      setLines(e.clientX - 100 + mainContent.scrollLeft, fieldsmhEl.value);
     }
     if (smResizeY) {
-      mainContent.style.setProperty('--sm-h', (e.clientY - 100) + 'px');
-      setLines(fieldsmwEl.value, e.clientY - 100);
+      mainContent.style.setProperty('--sm-h', (e.clientY - 100 + mainContent.scrollTop) + 'px');
+      setLines(fieldsmwEl.value, e.clientY - 100 + mainContent.scrollTop);
     }
   });
 
@@ -321,12 +338,17 @@
     iframes[0].classList.add('disabled');
   });
 
-  window.addEventListener('mouseup', e => {
-    smResizeX = false;
-    smResizeY = false;
-    iframes.forEach(el => el.classList.remove('disabled'));
-    fieldsmwEl.value = getComputedStyle(mainContent).getPropertyValue('--sm-w').trim().replace('px','');
-    fieldsmhEl.value = getComputedStyle(mainContent).getPropertyValue('--sm-h').trim().replace('px','');
+  document.addEventListener('mouseup', e => {
+    if (smResizeY) {
+      smResizeY = false;
+      iframes[0].classList.remove('disabled');
+      fieldsmhEl.value = getComputedStyle(mainContent).getPropertyValue('--sm-h').trim().replace('px','');
+    }
+    if (smResizeX) {
+      smResizeX = false;
+      iframes[0].classList.remove('disabled');
+      fieldsmwEl.value = getComputedStyle(mainContent).getPropertyValue('--sm-w').trim().replace('px','');
+    }
   });
 
   fieldsmhEl.addEventListener('input', e => {
@@ -339,8 +361,30 @@
     setLines(e.target.value, fieldsmhEl.value);
   });
 
-  btnsmDefaultEl.addEventListener('click', e => {
-    let {h, w} = JSON.parse(e.target.dataset.default);
+  btnsmRulerEl.addEventListener('click', e => {
+    iframes.forEach(el => el.classList.toggle('disabled'));
+  });
+
+  fieldSelEl.addEventListener('change', e => {
+    let {w, h} = JSON.parse(fieldSelEl.value);
+    mainContent.style.setProperty('--sm-w', w + 'px');
+    mainContent.style.setProperty('--sm-h', h + 'px');
+    setLines(w, h);
+    smSetViewport();
+  });
+
+  btnsmLandscapeEl.addEventListener('click', e => {
+    let h = Math.min(fieldsmwEl.value, fieldsmhEl.value);
+    let w = Math.max(fieldsmwEl.value, fieldsmhEl.value);
+    mainContent.style.setProperty('--sm-w', w + 'px');
+    mainContent.style.setProperty('--sm-h', h + 'px');
+    setLines(w, h);
+    smSetViewport();
+  });
+
+  btnsmPortraitEl.addEventListener('click', e => {
+    let w = Math.min(fieldsmwEl.value, fieldsmhEl.value);
+    let h = Math.max(fieldsmwEl.value, fieldsmhEl.value);
     mainContent.style.setProperty('--sm-w', w + 'px');
     mainContent.style.setProperty('--sm-h', h + 'px');
     setLines(w, h);
