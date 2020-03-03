@@ -1,8 +1,3 @@
-
-<script>
-  const URL = 'http://localhost:3000/login.html';
-</script>
-
 <style>
   html, body {
     margin: 0;
@@ -10,30 +5,32 @@
   }
   main {
     position: relative;
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
-    /*width: fit-content;*/
-    padding: 100px 0 0 100px;
     height: 100%;
-    overflow-y: hidden;
-    overflow-x: auto;
+    overflow: auto;
     box-sizing: border-box;
-    --iframe-h: 500px;
+    margin-top: 0;
+    transition: margin-top .5s;
+    --iframe-h: 600px;
+    --sm-h: 600px;
     --sm-w: 360px;
     --md-w: 991px;
+  }
+  main.pulled {
+    margin-top: 20%;
   }
   .container {
     border: 0;
     padding-right: 100px;
-    padding-bottom: calc(100vh - var(--iframe-h) - 100px);
   }
   .container.small {
     width: var(--sm-w);
-    height: var(--iframe-h);
+    height: var(--sm-h);
+    padding-bottom: calc(100vh - var(--sm-h) - 100px);
   }
   .container.medium {
     width: var(--md-w);
     height: var(--iframe-h);
+    padding-bottom: calc(100vh - var(--iframe-h) - 100px);
   }
   iframe {
     border: 0;
@@ -44,8 +41,7 @@
   iframe.disabled {
     pointer-events: none;
   }
-  #grid {
-    position: absolute;
+  svg {
     width: 100%;
     height: 100%;
     margin: 0px;
@@ -55,7 +51,39 @@
     left: 0;
     background: #242424;
   }
-
+  #grid {
+    position: fixed;
+  }
+  main.pulled #grid {
+    position: absolute;
+  }
+  #lines {
+    position: absolute;
+    background: transparent;
+  }
+  #setting {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1em;
+  }
+  fieldset {
+    border: 0;
+    padding: 1em 0;
+  }
+  .resizerY {
+    cursor: ew-resize;
+  }
+  .resizerX {
+    cursor: ns-resize;
+  }
+  #viewport {
+    position: relative;
+    padding: 100px 0 0 100px;
+    width: fit-content;
+    min-width: 100%;
+  }
   ::-webkit-scrollbar {
     width: 0!important;
     height: 0!important;
@@ -64,14 +92,21 @@
   }
 
 </style>
+
+<section id="setting">
+  <label>Viewport</label>
+  <fieldset>
+    <label>Small</label>
+    <input id="field-sm-w" type="number" /> x <input id="field-sm-h" type="number" />
+    <button id="btn-sm-default" data-default='{"w":360,"h":600}'>Default</button>
+  </fieldset>
+</section>
+
 <main id="mainContent">
+
+  <!-- rulers -->
   <svg id="grid" xmlns="http://www.w3.org/2000/svg" version="1.1">
 
-    <!-- frame lines -->
-    <line x1="0%"  y1="100" x2="100%"  y2="100" style="stroke-width:1px;stroke:red;stroke-opacity:1;" />
-    <line x1="0%"  y1="600" x2="100%"  y2="600" style="stroke:red;stroke-opacity:1;" />
-    <line x1="100"  y1="0" x2="100"  y2="100%" style="stroke:red;stroke-opacity:1;" />
-    <line x1="460"  y1="0" x2="460"  y2="100%" style="stroke:red;stroke-opacity:1;" />
     <line x1="1091"  y1="0" x2="1091"  y2="100%" style="stroke:red;stroke-opacity:1;" />
 
     <!-- grid lines -->
@@ -137,6 +172,7 @@
                M 0,1410 10,1410 M 0,1420 10,1420 M 0,1430 10,1430 M 0,1440 10,1440 M 0,1450 20,1450 M 0,1460 10,1460 M 0,1470 10,1470 M 0,1480 10,1480 M 0,1490 10,1490 M 0,1500 30,1500" transform="translate(0 -0.5)" style="stroke:#99CC00" />
 
     </g>
+    <!-- pixel marks -->
     <g style="fill-rule:nonzero;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;text-anchor:middle;font-family:Arial;font-size:15;">
       <g style="fill:#33B5E5;">
         <text x="100"  y="55">100</text>
@@ -185,20 +221,28 @@
     </g>
   </svg>
 
-  <section id="viewport" style="
-    position: relative;
-    height: 100%;
-    overflow: auto;
-  ">
-      <div class="container small">
-        <iframe id="iframe1" src=""></iframe>
-      </div>
+  <section id="viewport">
+    <svg id="lines" xmlns="http://www.w3.org/2000/svg" version="1.1">
 
-      <div class="container medium">
-        <iframe id="iframe2" src=""></iframe>
-      </div>
+      <!-- sm viewport lines -->
+      <line x1="0%"  y1="100" x2="100%"  y2="100" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
+      <line x1="100"  y1="0" x2="100"  y2="100%" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
+      <line id="line-sm-x" class="resizerX" x1="0%"  y1="600" x2="100%"  y2="600" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
+      <line id="line-sm-y" class="resizerY" x1="460"  y1="0" x2="460"  y2="100%" style="stroke-width:2px;stroke:red;stroke-opacity:1;" />
+
+      <text id="text-sm" x="120" y="80" style="fill:#FFFFFF;fill-opacity:0.5;font-family:Arial;font-size:1em;">?x?</text>
+    </svg>
+
+    <div class="container small">
+      <iframe id="iframe1" src=""></iframe>
+    </div>
+    <!-- 
+    <div class="container medium">
+      <iframe id="iframe2" src=""></iframe>
+    </div>
+    -->
   </section>
-<!--
+  <!--
   <svg id="x-axis" xmlns="http://www.w3.org/2000/svg" version="1.1" style="
     position: absolute;
     top: 30px;
@@ -208,32 +252,106 @@
   ">
     <line x1="0%" y1="0" x2="100%"  y2="0" style="stroke:red;stroke-opacity:1;" />
   </svg>
- -->
+  -->
 </main>
 
 <script type="text/javascript">
+  let smResizeX = false;
+  let smResizeY = false;
+  let mainContent = document.getElementById('mainContent');
+  let fieldsmhEl = document.getElementById('field-sm-h');
+  let fieldsmwEl = document.getElementById('field-sm-w');
+  let linesmxEl = document.getElementById('line-sm-x');
+  let linesmyEl = document.getElementById('line-sm-y');
+  let textsmEl = document.getElementById('text-sm');
+  let btnsmDefaultEl = document.getElementById('btn-sm-default');
+
+  function setLines(x, y) {
+    x = Number(x) + 100;
+    y = Number(y) + 100;
+    linesmxEl.setAttribute('y1', y);
+    linesmxEl.setAttribute('y2', y);
+    linesmyEl.setAttribute('x1', x);
+    linesmyEl.setAttribute('x2', x);
+    textsmEl.innerHTML = `${x-100} x ${y-100}`;
+  }
+
+  function smSetViewport(w, h) {
+    let smHeight = w || getComputedStyle(mainContent).getPropertyValue('--sm-h').trim().replace('px','');
+    let smWidth = h || getComputedStyle(mainContent).getPropertyValue('--sm-w').trim().replace('px','');
+    fieldsmwEl.value = smWidth;
+    fieldsmhEl.value = smHeight;
+    textsmEl.innerHTML = `${smWidth} x ${smHeight}`;
+  }
+
+  const URL = 'http://localhost:3000/question.html';
+
+  let iframes = document.querySelectorAll('iframe');
+  iframes.forEach(el => {
+    el.setAttribute('src', URL);
+  });
+
+  smSetViewport();
+  setLines(fieldsmwEl.value, fieldsmhEl.value);
+
+  window.addEventListener('click', e => {
+    if (e.ctrlKey) {
+      mainContent.classList.toggle('pulled');
+    }
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (smResizeX) {
+      mainContent.style.setProperty('--sm-w', (e.clientX - 100) + 'px');
+      setLines(e.clientX - 100, fieldsmhEl.value);
+    }
+    if (smResizeY) {
+      mainContent.style.setProperty('--sm-h', (e.clientY - 100) + 'px');
+      setLines(fieldsmwEl.value, e.clientY - 100);
+    }
+  });
+
+  linesmyEl.addEventListener('mousedown', e => {
+    smResizeX = true;
+    iframes[0].classList.add('disabled');
+  });
+
+  linesmxEl.addEventListener('mousedown', e => {
+    smResizeY = true;
+    iframes[0].classList.add('disabled');
+  });
+
+  window.addEventListener('mouseup', e => {
+    smResizeX = false;
+    smResizeY = false;
+    iframes.forEach(el => el.classList.remove('disabled'));
+    fieldsmwEl.value = getComputedStyle(mainContent).getPropertyValue('--sm-w').trim().replace('px','');
+    fieldsmhEl.value = getComputedStyle(mainContent).getPropertyValue('--sm-h').trim().replace('px','');
+  });
+
+  fieldsmhEl.addEventListener('input', e => {
+    mainContent.style.setProperty('--sm-h', e.target.value + 'px');
+    setLines(fieldsmwEl.value, e.target.value);
+  });
+
+  fieldsmwEl.addEventListener('input', e => {
+    mainContent.style.setProperty('--sm-w', e.target.value + 'px');
+    setLines(e.target.value, fieldsmhEl.value);
+  });
+
+  btnsmDefaultEl.addEventListener('click', e => {
+    let {h, w} = JSON.parse(e.target.dataset.default);
+    mainContent.style.setProperty('--sm-w', w + 'px');
+    mainContent.style.setProperty('--sm-h', h + 'px');
+    setLines(w, h);
+    smSetViewport();
+  });
+
   // window.addEventListener("resize", updateClientDimensionsText);
   // function updateClientDimensionsText() {
   //   let container = document.getElementById('mainContent');
   //   document.getElementById("clientDimensionsText").textContent = container.offsetWidth + " x " + container.offsetHeight;
   // }
   // updateClientDimensionsText();
-  let iframes = document.querySelectorAll('iframe');
-  iframes.forEach(el => {
-    el.setAttribute('src', URL);
-  });
 
-  // let xAxis = document.getElementById('x-axis');
-
-  // window.addEventListener('mousemove', e => {
-  //   xAxis.style.top = e.clientY + window.scrollY + 'px';
-  // }, true);
-
-  // window.addEventListener('click', e => {
-  //   if (e.ctrlKey) {
-  //     iframes.forEach(el => {
-  //       el.classList.toggle('disabled');
-  //     });
-  //   }
-  // })
 </script>
