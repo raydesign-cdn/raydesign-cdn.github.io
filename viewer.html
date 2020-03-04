@@ -104,7 +104,16 @@
     background: #fff;
     width: 2em;
     text-align: center;
-    padding: .2em;
+    line-height: 1.4;
+  }
+  .text-cross-axis.x-distance {
+    top: 200px;
+  }
+  .text-cross-axis.y-distance {
+    left: 200px;
+  }
+  #cross-lines line {
+    shape-rendering: crispEdges;
   }
 </style>
 
@@ -268,8 +277,12 @@
       <line id="cross-line-y" class="y-axis" x1="0%"  y1="0" x2="0%"  y2="100%" style="stroke-width:1px;stroke:red;stroke-opacity:1;" />
     </svg>
     <div id="cross-lines-tapes" class="d-none">
-      <span id="text-cross-xAxis" class="text-cross-axis"></span>
-      <span id="text-cross-yAxis" class="text-cross-axis"></span>
+      <span id="text-cross-xAxis" class="text-cross-axis x-axis"></span>
+      <span id="text-cross-yAxis" class="text-cross-axis y-axis"></span>
+    </div>
+    <div id="cross-distance-tapes" class="d-none">
+      <span id="cross-distance-xAxis" class="text-cross-axis x-distance"></span>
+      <span id="cross-distance-yAxis" class="text-cross-axis y-distance"></span>
     </div>
 
   </section>
@@ -301,11 +314,14 @@
   let linesmyEl = document.getElementById('line-sm-y');
   let crosslinesEl = document.getElementById('cross-lines');
   let crossTapesEl = document.getElementById('cross-lines-tapes');
+  let crossDistanceTapesEl = document.getElementById('cross-distance-tapes');
   let crosslinexEl = document.getElementById('cross-line-x');
   let crosslineyEl = document.getElementById('cross-line-y');
   let textsmEl = document.getElementById('text-sm');
   let textcrossxEl = document.getElementById('text-cross-xAxis');
   let textcrossyEl = document.getElementById('text-cross-yAxis');
+  let crossDistancexTapeEl = document.getElementById('cross-distance-xAxis');
+  let crossDistanceyTapeEl = document.getElementById('cross-distance-yAxis');
   let btnsmLandscapeEl = document.getElementById('btn-sm-landscape');
   let btnsmPortraitEl = document.getElementById('btn-sm-portrait');
   let iframes = document.querySelectorAll('iframe');
@@ -351,13 +367,13 @@
     }
     if (x >= 0) {
       textcrossxEl.innerHTML = x;
-      // textcrossxEl.setAttribute('x', Math.max(0, x - 30));
       textcrossxEl.style.left = Math.max(0, x - 32) + 'px';
+      crossDistancexTapeEl.style.left = Math.max(0, x - 32) + 'px';
     }
     if (y >= 0) {
       textcrossyEl.innerHTML = y;
-      // textcrossyEl.setAttribute('y', Math.min(window.visualViewport.height, y + 15));
       textcrossyEl.style.top = Math.min(window.visualViewport.height, y + 1) + 'px';
+      crossDistanceyTapeEl.style.top = Math.min(window.visualViewport.height, y + 1) + 'px';
     }
   }
 
@@ -388,19 +404,24 @@
     if (rulerMode && e.keyCode === 72) {
       let newLine = crosslinexEl.cloneNode();
       let newTape = textcrossyEl.cloneNode(true);
+      let newDistanceTape = crossDistanceyTapeEl.cloneNode(true);
       newLine.removeAttribute('id');
       newLine.classList.add('newLine', 'x-axis');
       newTape.removeAttribute('id');
       newTape.classList.add('newTape', 'x-axis');
-      crosslinesEl.append(newLine);
-      crossTapesEl.append(newTape);
-      newcrossLines.push({ line: newLine, tape: newTape });
+      newDistanceTape.removeAttribute('id');
+      newDistanceTape.classList.add('newDistanceTape', 'x-axis');
+      crosslinesEl.prepend(newLine);
+      crossTapesEl.prepend(newTape);
+      crossDistanceTapesEl.prepend(newDistanceTape);
+      newcrossLines.push({ line: newLine, tape: newTape, distanceTape: newDistanceTape });
     }
 
     if (rulerMode && e.keyCode === 90 && newcrossLines.length) {
-      let { line, tape } = newcrossLines.pop();
+      let { line, tape, distanceTape } = newcrossLines.pop();
       crosslinesEl.removeChild(line);
       crossTapesEl.removeChild(tape);
+      crossDistanceTapesEl.removeChild(distanceTape);
     }
   });
 
@@ -409,12 +430,22 @@
       rulerMode = !rulerMode;
       crosslinesEl.classList.toggle('d-none');
       crossTapesEl.classList.toggle('d-none');
+      crossDistanceTapesEl.classList.toggle('d-none');
       iframes.forEach(el => el.classList.toggle('disabled'));
       setCrossLines(e.clientX + mainContent.scrollLeft, e.clientY + mainContent.scrollTop);
     } else if (e.ctrlKey) {
       mainContent.classList.toggle('pulled');
     }
   });
+
+  function updateDistanceTapes() {
+    let yTapesNodes = crossTapesEl.querySelectorAll('.y-axis');
+    let yTapes = Array.prototype.slice.call(yTapesNodes, 0);
+    let yDistanceTapesNodes = crossDistanceTapesEl.querySelectorAll('.y-distance');
+    yTapes.sort((a, b) => {
+      return a.innerText - b.innerText;
+    });
+  }
 
   window.addEventListener('mousemove', e => {
     if (smResizeX) {
@@ -427,6 +458,7 @@
     }
     if (rulerMode) {
       setCrossLines(e.clientX + mainContent.scrollLeft, e.clientY + mainContent.scrollTop);
+      updateDistanceTapes();
     }
   });
 
