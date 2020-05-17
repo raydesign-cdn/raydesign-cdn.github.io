@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" data-country="HK" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+<html class="mx-custom" xmlns="http://www.w3.org/1999/xhtml" data-country="HK" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
   xmlns:dc="http://purl.org/dc/terms/"
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
@@ -126,7 +126,7 @@
     </script>
     -->
   </head>
-  <body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-5494 node-type-page i18n-en" >
+  <body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-5494 node-type-page i18n-en overflow-hidden" >
     <!-- projectx -->
     <!-- <script type="text/javascript" src="/sites/all/themes/oceanpark/js/jquery.path.js"></script> -->
     <!-- <script type="text/javascript" src="/sites/all/themes/oceanpark/js/respond.js"></script> -->
@@ -340,7 +340,7 @@
         </div>
       </div>
       -->
-      <ul class="mx-custom language-switcher-locale-url">
+      <ul class="language-switcher-locale-url">
         <li class="zh-hant first"><a href="/tc/experience/dining-and-shopping/dining-reservations" class="language-link" xml:lang="zh-hant">繁體</a></li>
         <li class="zh-hans"><a href="/sc/experience/dining-and-shopping/dining-reservations" class="language-link" xml:lang="zh-hans">简体</a></li>
         <!-- <li class="ko"><a href="/kr/experience/dining-and-shopping/dining-reservations" class="language-link" xml:lang="ko">한국어</a></li> -->
@@ -654,7 +654,7 @@
               <div class="breadcrumb clearfix hidden-xs"><a href="/en">Home</a><a href="/en/experience" class="parkattr">The Experience</a><a href="/en/experience/dining-and-shopping" class="dining">Dining &amp; Shopping</a><span>Dining Reservation</span></div>
               -->
               <div class="row pageContentRow clearfix">
-                <div class="mx-custom pageContentColLeft">
+                <div class="pageContentColLeft">
                   <!-- Title -->
                   <h1 class="text-blue text-uppercase">Registration</h1>
                   <div class="page-webform">
@@ -795,7 +795,7 @@
       <!-- /.section, /#footer -->
     </div>
     </div> <!-- /.wrapper -->
-    <div class="mx-custom dialog">
+    <div class="dialog">
       <div class="content">
         <p><strong>Online Registration Procedure</strong></p>
         <ol>
@@ -814,26 +814,18 @@
       </div>
     </div>
     <script>
-      $(function() {
-        if (window.visualViewport.width > 767) {
-          $("#edit-submitted-dateVisit").datepicker({
-            numberOfMonths: 2,
-            minDate: 0,
-            maxDate: 14
-          });
-        } else {
-          $("#edit-submitted-dateVisit").datepicker({
-            numberOfMonths: 1,
-            minDate: 0,
-            maxDate: 14
-          });
-        }
+      $("#edit-submitted-dateVisit").datepicker({
+        numberOfMonths: window.visualViewport.width > 767 ? 2 : 1,
+        minDate: 0,
+        maxDate: 14,
+        hideIfNoPrevNext: true
       });
 
       // events setup
       $('.mx-custom .close').on('click', function(e) {
         e.preventDefault();
-        $('.mx-custom.dialog').hide();
+        $('.mx-custom .dialog').hide();
+        $('body').removeClass('overflow-hidden');
       });
 
       $('#edit-submitted-guestNum').on('change', function(e) {
