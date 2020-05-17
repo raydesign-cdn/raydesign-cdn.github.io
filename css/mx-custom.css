@@ -6,12 +6,12 @@
 }
 
 /* page content */
-.mx-custom.pageContentColLeft {
+.mx-custom .pageContentColLeft {
   width: 100%;
 }
 
 /* language switcher */
-.mx-custom.language-switcher-locale-url {
+.mx-custom .language-switcher-locale-url {
   display: inline-flex;
   padding: 0;
   width: 100%;
@@ -20,7 +20,7 @@
   height: 100%;
   align-items: flex-end;
 }
-.mx-custom.language-switcher-locale-url li {
+.mx-custom .language-switcher-locale-url li {
   padding: 16px 8px;
 }
 
@@ -189,16 +189,24 @@
   background: var(--main-color);
   color: #fff;
 }
+#ui-datepicker-div table td {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
 
 /* dialog */
-.mx-custom.dialog {
+.mx-custom .dialog {
   width: 100%;
   position: fixed;
   top: 0;
   z-index: 9;
-  margin-top: 140px;
+  padding-top: 140px;
+  padding-bottom: 70px;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-.mx-custom.dialog .content {
+.mx-custom .dialog .content {
   width: 80%;
   margin: 0 auto;
   background-color: #fff;
@@ -207,13 +215,13 @@
   position: relative;
   box-shadow: 0px 0px 6px 2px rgba(0,0,0,.5);
 }
-.mx-custom.dialog .content ol {
+.mx-custom .dialog .content ol {
   padding-left: 20px;
 }
-.mx-custom.dialog .content ol > li {
+.mx-custom .dialog .content ol > li {
   padding: 8px 0;
 }
-.mx-custom.dialog .close {
+.mx-custom .dialog .close {
   position: absolute;
   top: 0;
   right: 0;
@@ -224,10 +232,82 @@
   font-weight: bold;
 }
 
+/* table */
+.mx-custom .pageContentColLeft table {
+  text-align: left;
+  margin-top: 2em;
+}
+.mx-custom .pageContentColLeft table tr td {
+  padding: 0 !important;
+}
+.mx-custom .pageContentColLeft table tr td.colon {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+/* thank you page */
+.mx-custom .pageContentColLeft.thank-you {
+  max-width: 60%;
+  margin: 0 auto;
+  float: none;
+  text-align: center;
+}
+.mx-custom .pageContentColLeft.thank-you h1 {
+  padding-right: 0;
+}
+.mx-custom .pageContentColLeft.thank-you p {
+  line-height: 1.5;
+}
+
+/* guest search page */
+.mx-custom .wrapper {
+  min-height: 100vh;
+  padding-bottom: 208px;
+}
+.mx-custom .wrapper .footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.mx-custom .form-item.webform-component--guestSearch {
+  display: flex;
+  margin: 0 auto 5em;
+  --field-width: 40%;
+}
+.mx-custom .form-item.webform-component--guestSearch .search {
+  display: block;
+  overflow: hidden;
+  text-indent: -9999px;
+  background: url(https://www.oceanpark.com.hk/sites/all/themes/oceanpark/img/common/topNav_ico_searchBtn_2x.png) no-repeat;
+  background-size: 36px;
+  z-index: 3;
+  max-width: 36px;
+  min-width: 36px;
+  background-position: center center;
+  margin-left: 1em;
+}
+
 /* responsive */
+@media (max-width: 1199px) {
+  .mx-custom .dialog {
+    padding-top: 70px;
+  }
+}
+@media (max-width: 991px) {
+  .mx-custom .form-item.webform-component--guestSearch {
+    --field-width: 80%;
+  }
+}
 @media (max-width: 767px) {
   :root {
     --field-width: 100%;  /* mobile */
+  }
+  .mx-custom .wrapper {
+    padding-bottom: 367px;
+  }
+  .mx-custom .pageContentColLeft.thank-you {
+    max-width: 100%;
   }
   .mx-custom .page-webform .guest-code {
     flex-direction: column;
@@ -254,11 +334,32 @@
   #ui-datepicker-div {
     width: 90%;
   }
+  .mx-custom .dialog .close {
+    padding: 10px;
+    font-size: 24px;
+  }
 }
 
 /* helpers */
+.mx-custom .d-flex {
+  display: flex;
+  align-items: center;
+}
+.mx-custom .mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
 .mx-custom .mt-0 {
   margin-top: 0 !important;
+}
+.mx-custom .mt-1 {
+  margin-top: 1em !important;
+}
+.mx-custom .mt-3 {
+  margin-top: 3em !important;
+}
+.mx-custom .mb-1 {
+  margin-bottom: 1em !important;
 }
 .mx-custom .mb-0 {
   margin-bottom: 0 !important;
@@ -268,4 +369,10 @@
 }
 .mx-custom .text-blue {
   color: var(--main-color);
+}
+.mx-custom .text-center {
+  text-align: center;
+}
+.mx-custom .overflow-hidden {
+  overflow: hidden;
 }
