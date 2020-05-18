@@ -2,7 +2,7 @@
 :root {
   --field-width: 35%;  /* desktop */
   --main-color: #1CB5E4;
-  --error-color: #FE0000;
+  --red-color: #FE0000;
 }
 
 /* page content */
@@ -36,12 +36,13 @@
 }
 .mx-custom .webform-component--guestTicket {
   display: flex;
+  /*flex-wrap: wrap;*/
 }
 .mx-custom .page-webform .radio {
   margin-right: 1em;
   margin-top: 10px;
   margin-bottom: 10px;
-  display: inline-block;
+  display: inline-flex;
 }
 .mx-custom .page-webform .radio:first-child label {
   padding-left: 0;
@@ -66,18 +67,19 @@
   background-color: #E5E5E5;
   left: 0;
   margin-right: 1rem;
+  min-width: 16px;
 }
 .mx-custom .page-webform input[type="radio"]:checked + label:before {
   background-color: var(--main-color);
 }
-.mx-custom .page-webform .guest-code {
+.mx-custom .page-webform .guest-code-row {
   display: flex;
   align-items: center;
 }
 .mx-custom .page-webform .guest-code label:after {
   content: "?";
   border-radius: 50rem;
-  background-color: red;
+  background-color: var(--red-color);
   color: #fff;
   width: 18px;
   height: 18px;
@@ -129,11 +131,25 @@
   display: inline-block;
   width: 32px;
   height: 32px;
-  border: 1px solid var(--error-color);
+  border: 1px solid var(--red-color);
   position: absolute;
   left: 0;
   top: 0;
   border-radius: 5px;
+}
+.mx-custom .form-item .message {
+  color: var(--red-color);
+  padding: 0 20px;
+  display: none;
+}
+.mx-custom .form-item.error .message {
+  display: block;
+}
+.mx-custom input[name="guest1TicketCode"][disabled] {
+  opacity: .5;
+}
+.mx-custom .page-webform div.error {
+  color: inherit;
 }
 
 /* sections */
@@ -309,7 +325,7 @@
   .mx-custom .pageContentColLeft.thank-you {
     max-width: 100%;
   }
-  .mx-custom .page-webform .guest-code {
+  .mx-custom .page-webform .guest-code-row {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -319,7 +335,7 @@
   .mx-custom .inline-input input.form-text {
     margin-right: 0;
   }
-  .mx-custom .page-webform .guest-code > .guest-code-input-row {
+  .mx-custom .page-webform .guest-code-row > .guest-code-input-row {
     width: 100%;
     display: flex;
     align-items: center;
@@ -364,11 +380,14 @@
 .mx-custom .mb-0 {
   margin-bottom: 0 !important;
 }
-.mx-custom .text-uppercase {
-  text-transform: uppercase;
+.mx-custom .pl-0 {
+  padding-left: 0 !important;
 }
 .mx-custom .text-blue {
   color: var(--main-color);
+}
+.mx-custom .text-red {
+  color: var(--red-color);
 }
 .mx-custom .text-center {
   text-align: center;
