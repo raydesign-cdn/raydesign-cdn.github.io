@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "data": [
+    {
+      "date": "2020-05-19",
+      "available": true
+    },
+    {
+      "date": "2020-05-20",
+      "available": false
+    },
+    {
+      "date": "2020-05-21",
+      "available": true
+    },
+    {
+      "date": "2020-05-22",
+      "available": true
+    },
+    {
+      "date": "2020-05-23",
+      "available": true
+    },
+    {
+      "date": "2020-05-24",
+      "available": true
+    },
+    {
+      "date": "2020-05-25",
+      "available": true
+    },
+    {
+      "date": "2020-05-26",
+      "available": true
+    },
+    {
+      "date": "2020-05-27",
+      "available": true
+    },
+    {
+      "date": "2020-05-28",
+      "available": true
+    },
+    {
+      "date": "2020-05-29",
+      "available": true
+    },
+    {
+      "date": "2020-05-30",
+      "available": true
+    },
+    {
+      "date": "2020-05-31",
+      "available": true
+    },
+    {
+      "date": "2020-06-01",
+      "available": true
+    },
+    {
+      "date": "2020-06-02",
+      "available": true
+    }
+  ]
+}
