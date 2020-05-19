@@ -564,11 +564,35 @@
       </div>
     </div>
     <script>
-      $("#edit-submitted-dateVisit").datepicker({
-        numberOfMonths: window.visualViewport.width > 767 ? 2 : 1,
-        minDate: 0,
-        maxDate: 14,
-        hideIfNoPrevNext: true
+      // datepicker setup
+      // var apiUrl = 'https://op-reg.mirumhk.com/api/timeslots';
+      var apiUrl = 'data/timeslots.json';
+      $.ajax({
+        url: apiUrl,
+        method: "GET",
+        dataType: 'JSON',
+        contentType: 'application/json; charset=UTF-8'
+      })
+      .done(function(resp) {
+        if (resp.success) {
+          var availDate = resp.data;
+          $("#edit-submitted-dateVisit").datepicker({
+            numberOfMonths: window.visualViewport.width > 767 ? 2 : 1,
+            minDate: new Date(availDate[0].date),
+            maxDate: new Date(availDate[availDate.length-1].date),
+            hideIfNoPrevNext: true,
+            // filter available dates to be selectable
+            beforeShowDay: function(date){
+              var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+              return [ availDate.find(function(data) { return dateString === data.date && data.available }) ];
+            }
+          });
+        } else {
+          window.location = '2error.html';
+        }
+      })
+      .fail(function(jqXHR, textStatus, errorThrown ) {
+        window.location = '2error.html';
       });
 
       // events setup
