@@ -36,7 +36,7 @@
 }
 .mx-custom .webform-component--guestTicket {
   display: flex;
-  /*flex-wrap: wrap;*/
+  flex-wrap: wrap;
 }
 .mx-custom .page-webform .radio {
   margin-right: 1em;
@@ -57,6 +57,8 @@
   display: inline-flex;
   align-items: center;
   line-height: 1;
+  padding-left: 0;
+  padding-right: 20px;
 }
 .mx-custom .page-webform input[type="radio"] + label:before {
   content: "";
@@ -208,6 +210,32 @@
 #ui-datepicker-div table td {
   padding-top: 6px !important;
   padding-bottom: 6px !important;
+}
+#ui-datepicker-div.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+  border: 0;
+  background: none;
+}
+#ui-datepicker-div.ui-datepicker .ui-datepicker-next span {
+  background-image: url(/img/right-arrow.png);
+}
+#ui-datepicker-div.ui-datepicker .ui-datepicker-prev span {
+  background-image: url(/img/left-arrow.png);
+}
+#ui-datepicker-div.ui-datepicker .ui-datepicker-prev span, 
+#ui-datepicker-div.ui-datepicker .ui-datepicker-next span {
+  background-size: contain;
+  background-position: top;
+  margin-top: -6px;
+}
+#ui-datepicker-div.ui-datepicker .ui-datepicker-prev-hover {
+  left: 2px;
+}
+#ui-datepicker-div.ui-datepicker .ui-datepicker-next-hover {
+  right: 2px;
+}
+#ui-datepicker-div.ui-datepicker .ui-datepicker-prev-hover,
+#ui-datepicker-div.ui-datepicker .ui-datepicker-next-hover {
+  top: 2px;
 }
 
 /* dialog */
