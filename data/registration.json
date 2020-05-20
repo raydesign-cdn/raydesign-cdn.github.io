@@ -15,7 +15,7 @@
       "ticketCode": ""
     }
   ],
-  "qrCode": "img/qrcode.png",
+  "qrCode": "/img/qrcode.png",
   "email": "abc@gmail.com",
   "contact": {
     "countryCode": "+852",
