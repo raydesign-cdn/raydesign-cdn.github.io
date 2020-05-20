@@ -28,6 +28,9 @@
 .mx-custom .form-item {
   width: var(--field-width);
 }
+.mx-custom .form-required {
+  color: var(--red-color);
+}
 .mx-custom .form-item.form-item-captcha-response,
 .mx-custom .form-item.form-type-checkbox,
 .mx-custom .form-item.webform-component-checkboxes,
@@ -381,6 +384,11 @@
   .mx-custom .dialog .close {
     padding: 10px;
     font-size: 24px;
+  }
+}
+@media (min-width: 768px) {
+  .mx-custom .page-webform .guest-code-row > label {
+    max-width: 40%;
   }
 }
 
