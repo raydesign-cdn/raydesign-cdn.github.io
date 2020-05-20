@@ -182,7 +182,7 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                           </select>
-                          <div class="message">Please select the no. of guests.</div>
+                          <div class="message">Please select the number of guests.</div>
                         </div>
                         <div class="form-item webform-component webform-component-textfield webform-component--dateVisit">
                           <label for="edit-submitted-dateVisit">Date of Visit <span class="form-required" title="This field is required.">*</span></label>
@@ -213,7 +213,7 @@
                                 <label class="mb-0" for="edit-submitted-guest@{guestNum}Code">Please enter the last 4 Digits of Ticket /<br>SmartFun Barcode Number<a href="pdf/User guide for locating ticket and SF numbers.pdf" target="_blank">?</a></label>
                                 <div class="guest-code-input-row">
                                   <input required="required" type="text" id="edit-submitted-guest@{guestNum}-code" name="guest@{guestNum}TicketCode" value="" size="60" maxlength="4" class="form-text required" />
-                                  <a href="#">Go for Buy Ticket / Pass</a>
+                                  <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fticketing.oceanpark.com.hk%2Foceanpark%2Fb2c%2Findex.cfm%2Fchange.language%2Flang%2Fen-GB%2F%3Fref%3Dhttps%3A%252F%252Fticketing.oceanpark.com.hk%252Foceanpark%252Fb2c%252Findex.cfm%252Fcalendar&data=02%7C01%7Cray.bf.lui%40hktdc.org%7C7b64e579eb984a9d9fa808d7fc7056b3%7Cde180f95eee842a49cabdc2dd6ce3ed0%7C1%7C0%7C637255431730116785&sdata=c7A4FWi%2FCeaowGgThFdbIM4eoqi360t5D1CV5jXmPbE%3D&reserved=0" target="_blank">Go for Buy Ticket / Pass</a>
                                 </div>
                               </div>
                               <div class="message pl-0">Please enter the last 4 digits of tickets / SmarFun Barcode Number</div>
@@ -472,7 +472,7 @@
                           <div id="edit-submitted-marketing" class="form-checkboxes">
                             <div class="form-item form-type-checkbox form-item-submitted-marketing-marketing">
                               <input required="required" type="checkbox" id="edit-submitted-marketing-1" name="TnC" value="marketing" class="form-checkbox" />  <label class="option" for="edit-submitted-marketing-1">
-                                I have read and agree to the <a href="#" class="text-blue">terms and conditions</a> of reservation
+                                I have read and agree to the <a href="#" class="tnc text-blue">terms and conditions</a> of reservation
                               </label>
                               <div class="message pl-0">Please check the Terms and Conditions.</div>
                             </div>
@@ -596,12 +596,22 @@
       });
 
       // events setup
+      
+      // close dialog
       $('.mx-custom .close').on('click', function(e) {
         e.preventDefault();
         $('.mx-custom .dialog').hide();
         $('body').removeClass('overflow-hidden');
       });
+      
+      // show dialog for clicking tnc
+      $('.mx-custom .tnc').on('click', function(e) {
+        e.preventDefault();
+        $('.mx-custom .dialog').show();
+        $('body').addClass('overflow-hidden');
+      });
 
+      // dynamically add and remove guests
       $('#edit-submitted-guestNum').on('change', function(e) {
         $('.guest-ticket-info').remove();
         if (this.value) {
@@ -616,6 +626,7 @@
         }
       });
 
+      // form submit handling
       var $form = $('form');
       $form.on('submit', function(e) {
         e.preventDefault();
@@ -657,6 +668,7 @@
         // ...
       });
 
+      // enable and disable ticke code based on ticket type
       $('.guest-ticket-info-section').delegate('input[type=radio]', 'click', function(e) {
         var currentOption = registrationForm[this.getAttribute('name')].value;
         var codeInputElement = registrationForm[this.getAttribute('name') + 'Code'];
