@@ -11,14 +11,18 @@ $.ajax({
   if (resp.success) {
     var availDate = resp.data;
     $("#edit-submitted-dateVisit").datepicker({
-      numberOfMonths: window.visualViewport.width > 767 ? 2 : 1,
+      numberOfMonths: $(window).outerWidth() > 767 ? 2 : 1,
       minDate: new Date(availDate[0].date),
       maxDate: new Date(availDate[availDate.length-1].date),
       hideIfNoPrevNext: true,
       // filter available dates to be selectable
       beforeShowDay: function(date){
         var dateString = $.datepicker.formatDate('yy-mm-dd', date);
-        return [ availDate.find(function(data) { return dateString === data.date && data.available }) ];
+        var found = false;
+        for (var i=0; i < availDate.length && !found; i++) {
+          found = dateString === availDate[i].date && availDate[i].available;
+        }
+        return [ found ];
       }
     });
   } else {
@@ -64,20 +68,19 @@ $('#edit-submitted-guestNum').on('change', function(e) {
 var $form = $('.mx-custom form');
 $form.on('submit', function(e) {
   e.preventDefault();
-
   // validation
-  $('.mx-custom :input').each(function(i, e) {
+  $('.mx-custom :input:not("#g-recaptcha-response")').each(function(i, e) {
     var $e = $(e);
-    $e.add($e.closest('.form-item')).toggleClass('error', $e.hasClass('form-checkbox') ? !e.checked : e.value === '');
+    $e.add($e.closest('.form-item')).toggleClass('has-error', $e.hasClass('form-checkbox') ? !e.checked : e.value === '');
   });
 
   // email verification
   if (registrationForm.email.value !== registrationForm.reinputEmail.value) {
-    $(registrationForm.email).add(registrationForm.reinputEmail).addClass('error');
+    $(registrationForm.reinputEmail).add(registrationForm.reinputEmail.parentNode).addClass('has-error');
   }
 
   // stop here if any error found
-  if ($form.find('.error').length) {
+  if ($form.find('.has-error').length) {
     return;
   }
 
@@ -94,23 +97,24 @@ $form.on('submit', function(e) {
   // save tickets info
   for(var i=0; i < formData.guestNum; i++) {
     formData.guests.push({
-      ticket: registrationForm['guest' + (i+1) + 'Ticket'].value,
+      ticket: $('input[name="guest' + (i+1) + 'Ticket"]:checked').val(),
       ticketCode: registrationForm['guest' + (i+1) + 'TicketCode'].value
     });
   }
   // here should call api to save reg info with formData
   // ...
+  console.log('passed');
 });
 
 // enable and disable ticke code based on ticket type
 $('.mx-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click', function(e) {
-  var currentOption = registrationForm[this.getAttribute('name')].value;
+  var currentOption = this.value;
   var codeInputElement = registrationForm[this.getAttribute('name') + 'Code'];
   if (currentOption === 'others') {
-    codeInputElement.value = this.dataset.codevalue;
+    $(codeInputElement).val($(this).data('codevalue'));
     $(codeInputElement).attr('disabled', true);
   } else {
-    codeInputElement.value = '';
+    $(codeInputElement).val('');
     $(codeInputElement).removeAttr('disabled');
   }
 });
