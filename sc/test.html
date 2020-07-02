@@ -1,0 +1,13 @@
+<html>
+<body>
+  <input required="required" type="text" id="edit-submitted-email" name="email" value="" size="60" maxlength="128" class="form-text required" autocomplete="off" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" />
+  <button onclick="validation()">submit</button>
+  <script>
+    function validation() {
+      if (document.querySelector('input').matches(':invalid')) {
+        alert('error')
+      }
+    }
+  </script>
+</body>
+</html>
