@@ -1,38 +1,35 @@
 var isSmartFunPage = $('html.op-custom.smartFun').length > 0;
 var apiPrefix = isSmartFunPage ? 'sf-' : '';
-var pageSuffix = isSmartFunPage ? '_smartFun' : '';
+var apiDateVisit = '';
 
-function sfValidation(barcode) {
-  // var apiUrl = '/api/sf-validate/' + barcode;
-  switch (barcode) {
-    case '1234567890syserr':
-      var exp = '-syserr';
-      break;
-    case '123456789expired':
-      var exp = '-expired';
-      break;
-    case '123456789invalid':
-      var exp = '-invalid';
-      break;
-    default:
-      var exp = '';
-      break;
-  }
-  var apiUrl = '/data/sf-validate' + exp + '.json';
+function sfValidation(element) {
+  var barcode = element.value;
+  var $element = $(element);
+  var apiUrl = '/api/sf-validate/' + barcode + '/' + apiDateVisit;
+  var apiUrl = '/data/sf-validate.json';
   var result = null;
-  $.ajax({
-      url: apiUrl,
-      method: "GET",
-      dataType: 'JSON',
-      async: false,
-      contentType: 'application/json; charset=UTF-8'
-    })
-    .done(function(resp) {
-      result = resp.data;
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-      result = null;
-    });
+  // duplication check
+  $('.guest-ticket-info-group .guest-ticket-info:not(.d-none)').each(function(i, el) {
+    var $anotherBarcode = $(el).find('input[type="text"]');
+    if (!$element.is($anotherBarcode) && barcode == $anotherBarcode.val() && result == null) {
+      result = { duplicate: true }
+    }
+  });
+  if (result == null) {
+    $.ajax({
+        url: apiUrl,
+        method: "GET",
+        dataType: 'JSON',
+        async: false,
+        contentType: 'application/json; charset=UTF-8'
+      })
+      .done(function(resp) {
+        result = resp.data;
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        result = null;
+      });
+  }
   return result;
 }
 
@@ -69,7 +66,7 @@ $('#edit-submitted-dateVisit-input').on('click', function(e) {
 $('#edit-submitted-guestNum').on('change', function(e) {
   if (this.value) {
     //datepicker setup
-    // var apiUrl = '/api/' + apiPrefix + 'timeslots' + '/' + this.value;
+    var apiUrl = '/api/' + apiPrefix + 'timeslots' + '/' + this.value;
     var apiUrl = '/data/timeslots.json';
     $.ajax({
         url: apiUrl,
@@ -90,6 +87,7 @@ $('#edit-submitted-guestNum').on('change', function(e) {
             onSelect: function(date) {
               $('#edit-submitted-dateVisit-input').val(date);
               $('#calendar-section').hide();
+              apiDateVisit = date.replace(/\//g, '-');
             },
             // filter available dates to be selectable
             beforeShowDay: function(date) {
@@ -114,11 +112,11 @@ $('#edit-submitted-guestNum').on('change', function(e) {
             }
           });
         } else {
-          window.location = 'error' + pageSuffix + '.html';
+          window.location = 'error.html';
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-        window.location = 'error' + pageSuffix + '.html';
+        window.location = 'error.html';
       });
     var template = $('#guest-ticket-info-template').html();
     // render list of guest info
@@ -163,20 +161,24 @@ $form.submit(function(e) {
   $form.find('.guest-ticket-info input.form-text').not('.d-none').each(function(i, e) {
     var $e = $(e);
     var currentOption = $e.closest('.form-item').prev('.webform-component').find('input:checked').val();
-    var hasError = (e.value.length < 4) && /generalTickets|smartfunPass/.test(currentOption);
+    // var hasError = (e.value.length < 4) && /generalTickets|smartfunPass/.test(currentOption);
+    var hasError = e.value.length < 4 && currentOption == 'generalTickets';
     var fieldset = [$e, $e.closest('.form-item')];
     $(fieldset).toggleClass('error', hasError);
     // smartFun validation
     if (isSmartFunPage) {
       $e.closest('.form-item').find('.message').addClass('d-none');
-      if (e.value.length < 16) {
+      if (e.value.length < 1) {
         $(fieldset).toggleClass('error', true);
         $e.closest('.form-item').find('.message.len-err').removeClass('d-none');
-      } else {
-        var resp = sfValidation(e.value);
+      } else if (apiDateVisit) {
+        var resp = sfValidation(e);
         if (!resp) {
           $(fieldset).toggleClass('error', true);
           $e.closest('.form-item').find('.message.sys-err').removeClass('d-none');
+        } else if (resp.duplicate) {
+          $(fieldset).toggleClass('error', true);
+          $e.closest('.form-item').find('.message.duplicated').removeClass('d-none');
         } else if (!resp.valid) {
           $(fieldset).toggleClass('error', true);
           $e.closest('.form-item').find('.message.invalid').removeClass('d-none');
@@ -241,5 +243,8 @@ $('.op-custom .guest-ticket-info-section').delegate('input[type=text]', 'keyup k
   }
   if (this.value.length > maxlength) {
     this.value = this.value.slice(0, maxlength);
+  }
+  if (isSmartFunPage) {
+    this.value = this.value.toUpperCase();
   }
 });
