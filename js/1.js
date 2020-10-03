@@ -6,7 +6,6 @@ function sfValidation(element) {
   var barcode = element.value;
   var $element = $(element);
   var apiUrl = '/api/sf-validate/' + barcode + '/' + apiDateVisit;
-  var apiUrl = '/data/sf-validate.json';
   var result = null;
   // duplication check
   $('.guest-ticket-info-group .guest-ticket-info:not(.d-none)').each(function(i, el) {
@@ -67,7 +66,7 @@ $('#edit-submitted-guestNum').on('change', function(e) {
   if (this.value) {
     //datepicker setup
     var apiUrl = '/api/' + apiPrefix + 'timeslots' + '/' + this.value;
-    var apiUrl = '/data/timeslots.json';
+    var apiUrl = '/data/' + apiPrefix + 'timeslots.json';
     $.ajax({
         url: apiUrl,
         method: "GET",
@@ -161,10 +160,7 @@ $form.submit(function(e) {
   $form.find('.guest-ticket-info input.form-text').not('.d-none').each(function(i, e) {
     var $e = $(e);
     var currentOption = $e.closest('.form-item').prev('.webform-component').find('input:checked').val();
-    // var hasError = (e.value.length < 4) && /generalTickets|smartfunPass/.test(currentOption);
-    var hasError = e.value.length < 4 && currentOption == 'generalTickets';
     var fieldset = [$e, $e.closest('.form-item')];
-    $(fieldset).toggleClass('error', hasError);
     // smartFun validation
     if (isSmartFunPage) {
       $e.closest('.form-item').find('.message').addClass('d-none');
@@ -187,6 +183,12 @@ $form.submit(function(e) {
           $e.closest('.form-item').find('.message.expired').removeClass('d-none');
         }
       }
+    } else {
+      // general ticket validation
+      var hasError = e.value.length < 4 || (currentOption == 'others' && (Number(e.value) < 1900 || Number(e.value) > 2020));
+      $(fieldset).toggleClass('error', hasError);
+      $e.closest('.form-item').find('.message').addClass('d-none');
+      $e.closest('.form-item').find('.message' + (currentOption == 'generalTickets' ? '.empty-err' : '.year-err')).removeClass('d-none');
     }
   });
 
@@ -226,7 +228,7 @@ $form.submit(function(e) {
 $('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click', function(e) {
   var currentOption = this.value;
   var codeInputElement = registrationForm[this.getAttribute('name') + 'Code'];
-  if (/others|buyTickets/.test(currentOption)) {
+  if (/buyTickets/.test(currentOption)) {
     $(codeInputElement).val($(this).data('codevalue'));
     $(codeInputElement).attr('disabled', true);
   } else {
@@ -238,7 +240,10 @@ $('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click'
 // only accept alpahnumeric for ticket code and length
 $('.op-custom .guest-ticket-info-section').delegate('input[type=text]', 'keyup keypress', function(e) {
   var maxlength = isSmartFunPage ? 16 : 4;
-  if (this.value.match(/[^a-zA-Z0-9]/g)) {
+  var option = registrationForm['guest' + ($(this).closest('.guest-ticket-info').index() + 1) + 'Ticket'].value;
+  if (!isSmartFunPage && option == 'others' && this.value.match(/[^0-9]/g)) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+  } else if (this.value.match(/[^a-zA-Z0-9]/g)) {
     this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
   }
   if (this.value.length > maxlength) {
