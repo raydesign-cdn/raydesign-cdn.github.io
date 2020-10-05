@@ -44,7 +44,7 @@
     }
     /* override bootstrap */
     #editor-modal.modal {
-      z-index: 9999;
+      z-index: 99999;
       top: auto;
       width: 80%;
       min-width: 50%;
@@ -273,7 +273,7 @@
       let original = '';
       let originalCodes = '';
       let currLang = getCurrLang(location.href);
-      let content = JSON.parse(sessionStorage.getItem("content")) || {};
+      let content = location.hostname ? JSON.parse(sessionStorage.getItem("content")) || {} : {};
       let isApplying = false;
       let $currTarget = null;
       let msgTimeout = null;
@@ -286,7 +286,7 @@
       function apply(c) {
         let $ad = $contentHolder.find('#hiddenAdsysDiv');
         content[currLang] = c;
-        sessionStorage.setItem("content", JSON.stringify(content));
+        location.hostname && sessionStorage.setItem("content", JSON.stringify(content));
         $contentHolder.children().not('#editor-modal, #editor-toggle, #tool-container').remove();
         $contentHolder.prepend($ad).prepend(content[currLang]);
         isApplying = content[currLang] != originalCodes;
@@ -622,7 +622,7 @@
 
       // apply button handler
       $('#reset').on('click', (e) => {
-        sessionStorage.removeItem('content');
+        location.hostname && sessionStorage.removeItem('content');
         restoreOrigDom();
         revertEditorContent();
       });
