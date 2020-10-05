@@ -1,5 +1,5 @@
 var isDebug = !location.hostname || location.hostname == 'localhost';
-var origin = isDebug ? 'http://localhost:8080' : '';
+var origin = isDebug ? 'http://localhost:8080' : 'https://raydesign-cdn.github.io';
 var Tool = {
   jsLibs: {
     jQuery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js',
@@ -10,7 +10,7 @@ var Tool = {
   style: document.createTextNode(`
     #tool-container {
       top: 40px;
-      right: 40px;
+      right: 8px;
       position: fixed;
       width: 100px;
       display: flex;
