@@ -2,6 +2,7 @@
   "data":
   {
     "valid": true,
-    "expired": false
+    "expired": false,
+    "duplicate": false
   }
 }

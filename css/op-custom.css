@@ -22,6 +22,9 @@
   display:inline-block;
   background: url(/img/checkradio.png) 0 -400px no-repeat;
 }
+.noTicket .webform-component.webform-component-checkboxes input +label{
+  background-image: url(/img/checkradio_noTicket.png);
+}
 .smartFun .webform-component.webform-component-checkboxes input +label{
   background-image: url(/img/checkradio_smartFun.png);
 }
@@ -64,6 +67,12 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
 .op-custom p {
   margin-bottom: 20px;
   line-height: 150%;
+}
+.op-custom #notice {
+  color: #FE0000;
+}
+.op-custom #notice a {
+  text-decoration: underline;
 }
 
 /* language switcher */
@@ -137,6 +146,9 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
 .op-custom .page-webform input[type="radio"]:checked + label:before {
   background-color: #1CB5E4;
 }
+.op-custom.noTicket .page-webform input[type="radio"]:checked + label:before {
+  background-color: #1FB3A0;
+}
 .op-custom.smartFun .page-webform input[type="radio"]:checked + label:before {
   background-color: #FF990C;
 }
@@ -144,7 +156,7 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
   display: flex;
   align-items: center;
 }
-.op-custom .page-webform .guest-code label > a {
+.op-custom .page-webform .guest-code label .guest-code-label[for="generalTickets"] a {
   border-radius: 50rem;
   background-color: #FE0000;
   color: #fff;
@@ -166,6 +178,9 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
 .op-custom .page-webform .guest-code a {
   color: #1CB5E4;
 }
+.op-custom.noTicket .page-webform .guest-code a {
+  color: #1FB3A0;
+}
 .op-custom.smartFun .page-webform .guest-code a {
   color: #FF990C;
 }
@@ -177,6 +192,9 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
 }
 .op-custom .page-webform input[type="submit"] {
   background: #1CB5E4;
+}
+.op-custom.noTicket .page-webform input[type="submit"] {
+  background: #1FB3A0;
 }
 .op-custom.smartFun .page-webform input[type="submit"] {
   background: #FF990C;
@@ -327,6 +345,12 @@ input[type=number] {
   border-left: 1px solid #1CB5E4;
   margin-left: -1px;
 }
+.noTicket .ui-datepicker-inline,
+.noTicket .ui-datepicker-inline .ui-datepicker-header,
+.noTicket .ui-datepicker-inline .ui-datepicker-group-first,
+.noTicket .ui-datepicker-inline .ui-datepicker-group-last {
+  border-color: #1FB3A0;
+}
 .smartFun .ui-datepicker-inline,
 .smartFun .ui-datepicker-inline .ui-datepicker-header,
 .smartFun .ui-datepicker-inline .ui-datepicker-group-first,
@@ -339,6 +363,10 @@ input[type=number] {
 }
 .ui-datepicker-inline .ui-datepicker-calendar th {
   color: #1CB5E4;
+}
+.noTicket .ui-datepicker-inline .ui-datepicker-header,
+.noTicket .ui-datepicker-inline .ui-datepicker-calendar th {
+  color: #1FB3A0;
 }
 .smartFun .ui-datepicker-inline .ui-datepicker-header,
 .smartFun .ui-datepicker-inline .ui-datepicker-calendar th {
@@ -362,6 +390,9 @@ input[type=number] {
   background: #1CB5E4;
   color: #fff;
 }
+.noTicket .ui-datepicker-inline .ui-state-selected .ui-state-default {
+  background: #1FB3A0;
+}
 .smartFun .ui-datepicker-inline .ui-state-selected .ui-state-default {
   background: #FF990C;
 }
@@ -382,6 +413,12 @@ input[type=number] {
 }
 .ui-datepicker-inline.ui-datepicker .ui-datepicker-prev span {
   background-image: url(/img/left-arrow.png);
+}
+.noTicket .ui-datepicker-inline.ui-datepicker .ui-datepicker-next span {
+  background-image: url(/img/right-arrow-noTicket.png);
+}
+.noTicket .ui-datepicker-inline.ui-datepicker .ui-datepicker-prev span {
+  background-image: url(/img/left-arrow-noTicket.png);
 }
 .smartFun .ui-datepicker-inline.ui-datepicker .ui-datepicker-next span {
   background-image: url(/img/right-arrow-smartFun.png);
@@ -431,9 +468,16 @@ input[type=number] {
   border-bottom: 1px solid #1CB5E4;
   color: #1CB5E4;
 }
+.noTicket #legend,
+.noTicket #legend .upper {
+  border-color: #1FB3A0;
+}
 .smartFun #legend,
 .smartFun #legend .upper {
   border-color: #FF990C;
+}
+.noTicket #legend .upper {
+  color: #1FB3A0;
 }
 .smartFun #legend .upper {
   color: #FF990C;
@@ -528,9 +572,16 @@ input[type=number] {
   position: relative;
   box-shadow: 0px 8px 10px 0 rgba(0,0,0,.5);
   background-color: #fff;
+  z-index: 1;
 }
 .op-custom .dialog .content #general.tab {
   z-index: 1;
+}
+.op-custom .dialog .content #noTicket.tab {
+  border-color: #1FB3A0;
+}
+.op-custom .dialog .content #noTicket.tab .close {
+  color: #1FB3A0;
 }
 .op-custom .dialog .content #smartFun.tab {
   border-color: #FF990C;
@@ -548,13 +599,14 @@ input[type=number] {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   background-color: #fff;
+}
+.op-custom .dialog .content [data-tab].active {
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,.5);
 }
 .op-custom .dialog .content [data-tab="#general"] {
-  border-right: 0;
   color: #1CB5E4;
 }
-.op-custom .dialog .content [data-tab="#general"].active {
+.op-custom .dialog .content [data-tab].active {
   z-index: 1;
 }
 .op-custom .dialog .content [data-tab="#general"].active,
@@ -562,8 +614,16 @@ input[type=number] {
   background-color: #1CB5E4;
   color: #fff;
 }
+.op-custom .dialog .content [data-tab="#noTicket"] {
+  border-color: #1FB3A0;
+  color: #1FB3A0;
+}
+.op-custom .dialog .content [data-tab="#noTicket"].active,
+.op-custom .dialog .content [data-tab="#noTicket"]:hover {
+  background-color: #1FB3A0;
+  color: #fff;
+}
 .op-custom .dialog .content [data-tab="#smartFun"] {
-  border-left: 0;
   border-color: #FF990C;
   color: #FF990C;
 }
@@ -571,6 +631,14 @@ input[type=number] {
 .op-custom .dialog .content [data-tab="#smartFun"]:hover {
   background-color: #FF990C;
   color: #fff;
+}
+.tabs[active="#general"] > [data-tab="#noTicket"],
+.tabs[active="#noTicket"] > [data-tab="#smartFun"] {
+  border-left: 0 !important;
+}
+.tabs[active="#noTicket"] > [data-tab="#general"],
+.tabs[active="#smartFun"] > [data-tab="#noTicket"] {
+  border-right: 0 !important;
 }
 
 /* thank you page */
@@ -621,6 +689,11 @@ input[type=number] {
 /* smartFun */
 .op-custom.smartFun .section_parkinfo .pageAssist {
   background: linear-gradient(180deg, rgba(255, 153, 0, .9) 0%, rgba(255, 102, 0, .9) 100%);
+}
+
+/* noTicket */
+.op-custom.noTicket .section_parkinfo .pageAssist {
+  background: linear-gradient(180deg, rgba(36, 213, 190, .9) 0%, rgba(31, 181, 162, .9) 100%);
 }
 
 /* responsive */
@@ -737,6 +810,9 @@ input[type=number] {
 }
 .op-custom .text-theme {
   color: #1CB5E4;
+}
+.op-custom.noTicket .text-theme {
+  color: #1FB3A0;
 }
 .op-custom.smartFun .text-theme {
   color: #FF990C;

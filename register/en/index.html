@@ -85,7 +85,14 @@
               <div class="row pageContentRow clearfix">
                 <div class="pageContentColLeft">
                   <!-- Title -->
-                  <h1 class="text-theme">Online Reservation - General Admission</h1>
+                  <h1 class="text-theme">Online Reservation - Admission Ticket Holder</h1>
+                  <p id="notice">Please note:&nbsp;Online reservation is not required for the participants of Green Staycation held on the following dates.
+                  <br><br>
+                  Yoga Vogue -&nbsp;1-4, 10-11, 17-18, 24-26, 31 October &amp; 1 November 2020<br>
+                  Brick Hill Secret Unveil&nbsp;-&nbsp;17-18, 24-26, 31 October &amp; 1, 20-22, 27-29 November &amp; 4-6, 11-13 December 2020
+                    <br><br>
+                    <a class="text-theme" href="https://www.oceanpark.com.hk/en/experience/seasonal-events/green-staycation/yoga-vogue" target="_blank">Explore Green Staycation</a>
+                  </p>
                   <div class="page-webform">
                     <div id="webform-ajax-wrapper-5494">
                       <form name="registrationForm" class="webform-client-form" enctype="multipart/form-data" action="" accept-charset="UTF-8" novalidate>
@@ -111,25 +118,24 @@
                           <div class="guest-ticket-info">
                             <label>Registered Guest @{guestNum} <span class="form-required" title="This field is required."></span></label>
                             <div class="webform-component webform-component-textfield webform-component--guestTicket">
-                              <div class="radio">
+                              <div class="radio d-none">
                                 <input type="radio" id="edit-submitted-guest@{guestNum}-general-tickets" name="guest@{guestNum}Ticket" value="generalTickets" checked />
                                 <label for="edit-submitted-guest@{guestNum}-general-tickets"><strong>Ticket Holder</strong></label>
-                              </div>
-                              <div class="radio">
-                                <input type="radio" id="edit-submitted-guest@{guestNum}-others" name="guest@{guestNum}Ticket" value="others" />
-                                <label for="edit-submitted-guest@{guestNum}-others"><strong>Birthday/Welfare Ticket or Voucher Holder/Ticket To Be Purchased</strong></label>
                               </div>
                             </div>
                             <div class="form-item webform-component webform-component-textfield webform-component--guest@{guestNum}Code guest-code">
                               <div class="guest-code-row">
-                                <label class="mb-0" for="edit-submitted-guest@{guestNum}Code">Please enter the last 4 characters of ticket barcode number<a href="/pdf/User guide for locating the last 4 characters of ticket.pdf" target="_blank">?</a></label>
+                                <label class="mb-0" for="edit-submitted-guest@{guestNum}Code">
+                                  <span class="guest-code-label" for="generalTickets">
+                                    Please enter the last 4 characters of ticket barcode number <a href="/pdf/User guide for locating the last 4 characters of ticket.pdf" target="_blank">?</a>
+                                  </span>
+                                </label>
                                 <div class="guest-code-input-row">
                                   <input required="required" type="text" id="edit-submitted-guest@{guestNum}-code" name="guest@{guestNum}TicketCode" value="" size="60" maxlength="4" class="form-text required" autocomplete="off" />
                                   <a href="https://ticketing.oceanpark.com.hk/oceanpark/b2c/index.cfm/change.language/lang/en-GB" target="_blank">Buy Ticket</a>
                                 </div>
                               </div>
                               <div class="message pl-0 empty-err">Please enter the last 4 characters of ticket barcode number.</div>
-                              <div class="message pl-0 year-err">Please input year in the range 1900-2020.</div>
                             </div>
                           </div>
                         </script>
@@ -150,7 +156,7 @@
                         </div>  <!-- /#calendar-section -->
 
                         <div class="guest-ticket-info-section" style="display: none;">
-                          <h3 class="text-theme">Ticket Type</h3>
+                          <!-- <h3 class="text-theme">Ticket Type</h3> -->
                           <div class="guest-ticket-info-group"></div>
                         </div>  <!-- /.guest-ticket-info-section -->
 
@@ -225,8 +231,9 @@
     </div> <!-- /.wrapper -->
     <div class="dialog">
       <div class="content">
-        <div class="tabs">
-          <a href="#" class="active" data-tab="#general"><strong>General Admission</strong></a>
+        <div class="tabs" active="#general">
+          <a href="index.html" class="active" data-tab="#general"><strong>Admission Ticket Holder</strong></a>
+          <a href="/register-nt/en/" data-tab="#noTicket"><strong>Birthday / Welfare Ticket or Voucher Holder / Ticket To Be Purchased</strong></a>
           <a href="/smartfun/en/" data-tab="#smartFun"><strong>SmartFun Member / Unlimited Entry Pass Holder</strong></a>
         </div>
         <div id="general" class="tab">
@@ -234,7 +241,7 @@
             In line with Ocean Park’s reopening policy, please take note of the following new arrangements:
           </p>
           <ol>
-            <li>All guests are required to make an online reservation prior to their visit.  Reservations will be processed on a first-come, first-served basis. Upon arrival, guests are required to present the reservation QR code and their registered SmartFun Annual Pass or Unlimited Entry Pass to enter the park. Please note that any unauthorised resale of Ocean Park admission tickets or reservation QR codes is prohibited by the Ocean Park Bylaw (Cap. 388B).</li>
+            <li>All guests are required to make an online reservation prior to their visit.  Reservations will be processed on a first-come, first-served basis. Upon arrival, guests are required to present the reservation QR code and their registered admission tickets to enter the park. Please note that any unauthorised resale of Ocean Park admission tickets or reservation QR codes is prohibited by the Ocean Park Bylaw (Cap. 388B). </li>
             <li>
             	Ocean Park will implement below regulations in accordance with the Government’s Prevention and Control of Disease Ordinance (Cap. 599):<br/>
             	(i) Guests are required to wear face masks and undergo body temperature check upon entry. <br/>

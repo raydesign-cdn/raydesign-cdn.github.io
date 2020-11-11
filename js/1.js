@@ -65,7 +65,7 @@ $('#edit-submitted-dateVisit-input').on('click', function(e) {
 $('#edit-submitted-guestNum').on('change', function(e) {
   if (this.value) {
     //datepicker setup
-    var apiUrl = '/api/' + apiPrefix + 'timeslots' + '/' + this.value;
+    // var apiUrl = '/api/' + apiPrefix + 'timeslots' + '/' + this.value;
     var apiUrl = '/data/' + apiPrefix + 'timeslots.json';
     $.ajax({
         url: apiUrl,
@@ -185,7 +185,7 @@ $form.submit(function(e) {
       }
     } else {
       // general ticket validation
-      var hasError = e.value.length < 4 || (currentOption == 'others' && (Number(e.value) < 1900 || Number(e.value) > 2020));
+      var hasError = e.value.length < 4 || (currentOption == 'others' && (isNaN(e.value) || Number(e.value) < 1900 || Number(e.value) > new Date().getFullYear()));
       $(fieldset).toggleClass('error', hasError);
       $e.closest('.form-item').find('.message').addClass('d-none');
       $e.closest('.form-item').find('.message' + (currentOption == 'generalTickets' ? '.empty-err' : '.year-err')).removeClass('d-none');
@@ -235,13 +235,18 @@ $('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click'
     $(codeInputElement).val('');
     $(codeInputElement).removeAttr('disabled');
   }
+  // show corresponding label for input
+  $(this).closest('.guest-ticket-info').find('.guest-code-label').each(function(i, el) {
+    var forOption = $(el).attr('for');
+    $(el).toggleClass('d-none', currentOption != forOption);
+  });
 });
 
 // only accept alpahnumeric for ticket code and length
-$('.op-custom .guest-ticket-info-section').delegate('input[type=text]', 'keyup keypress', function(e) {
+$('.op-custom .guest-ticket-info-section').delegate('input[type=text]', 'keyup', function(e) {
   var maxlength = isSmartFunPage ? 16 : 4;
-  var option = registrationForm['guest' + ($(this).closest('.guest-ticket-info').index() + 1) + 'Ticket'].value;
-  if (!isSmartFunPage && option == 'others' && this.value.match(/[^0-9]/g)) {
+  var option = $(this).closest('.form-item').prev('.webform-component').find('input:checked').val();
+  if (!isSmartFunPage && option == 'others' && this.value.match(/[^0-9]/g) != null) {
     this.value = this.value.replace(/[^0-9]/g, '');
   } else if (this.value.match(/[^a-zA-Z0-9]/g)) {
     this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
