@@ -94,15 +94,23 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
   width: 35%;
   margin-bottom: 20px;
 }
+.op-custom .form-item.webform-component--name {
+  width: 100% !important;
+}
+.op-custom .form-item > label[for="edit-submitted-name"] {
+  display: block;
+}
 .op-custom .form-required {
   color: #FE0000;
 }
 .op-custom .form-item.form-item-captcha-response,
 .op-custom .form-item.form-type-checkbox,
 .op-custom .form-item.webform-component-checkboxes,
+.op-custom .form-item.guest-name,
 .op-custom .form-item.guest-code {
   width: 100%;
 }
+.op-custom .form-item.guest-name,
 .op-custom .form-item.guest-code {
   margin-top: 10px;
 }
@@ -152,10 +160,22 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
 .op-custom.smartFun .page-webform input[type="radio"]:checked + label:before {
   background-color: #FF990C;
 }
+/* mask the checkbox image (tick) */
+/* .op-custom .webform-component.webform-component-checkboxes input + label:after {
+  content: "";
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  display: inline-block;
+  position: absolute;
+  top: 200px;
+  left: 0;
+} */
 .op-custom .page-webform .guest-code-row {
   display: flex;
   align-items: center;
 }
+.op-custom .page-webform .guest-name label .guest-code-label[for="generalTickets"] a,
 .op-custom .page-webform .guest-code label .guest-code-label[for="generalTickets"] a {
   border-radius: 50rem;
   background-color: #FE0000;
@@ -175,12 +195,19 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
   margin-left: 1em;
   margin-right: 1em;
 }
+.op-custom .page-webform .guest-name input {
+  width: 250px;
+  margin-left: 1em;
+}
+.op-custom .page-webform .guest-name a,
 .op-custom .page-webform .guest-code a {
   color: #1CB5E4;
 }
+.op-custom.noTicket .page-webform .guest-name a,
 .op-custom.noTicket .page-webform .guest-code a {
   color: #1FB3A0;
 }
+.op-custom.smartFun .page-webform .guest-name a,
 .op-custom.smartFun .page-webform .guest-code a {
   color: #FF990C;
 }
@@ -696,6 +723,42 @@ input[type=number] {
   background: linear-gradient(180deg, rgba(36, 213, 190, .9) 0%, rgba(31, 181, 162, .9) 100%);
 }
 
+/* health declaration form */
+#health-declaration .webform-component--visitor1,
+#health-declaration .webform-component--visitor2,
+#health-declaration .webform-component--visitor3 {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+#health-declaration [for*="edit-submitted-visitor"] {
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+#health-declaration .webform-component--marketing {
+  width: 100% !important;
+  margin: 40px 0;
+}
+#health-declaration .form-item-submitted-marketing-marketing {
+  width: 100% !important;
+}
+#health-declaration .captcha {
+  margin-top: 20px;
+}
+#health-declaration #form-item-optional {
+  margin-top:25px;
+}
+/* #health-declaration .contentInner ul { */
+.op-custom .contentInner ul {
+  margin-left: 20px;
+}
+/* #health-declaration .contentInner ul li { */
+.op-custom .contentInner ul li {
+  list-style: disc;
+  padding: 0;
+}
+
+
 /* responsive */
 @media (max-width: 1199px) {
   .op-custom .dialog {
@@ -709,6 +772,7 @@ input[type=number] {
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
+  #health-declaration.op-custom .form-item > #edit-submitted-name,
   #health-declaration.op-custom .form-item {
     width: 50%;
   }
@@ -752,6 +816,7 @@ input[type=number] {
     display: flex;
     align-items: center;
   }
+  .op-custom .page-webform .guest-name input,
   .op-custom .page-webform .guest-code input {
     margin-left: 0;
     flex-grow: 1;
@@ -786,6 +851,11 @@ input[type=number] {
     margin: 0;
   }
 }
+@media (min-width: 1024px) {
+  .op-custom .form-item > #edit-submitted-name {
+    width: 35%;
+  }
+}
 @media (min-width: 768px) {
   .op-custom .page-webform .guest-code-row > label {
     max-width: 40%;
@@ -793,6 +863,15 @@ input[type=number] {
 }
 
 @media print {
+  body {
+    font-size: 12px;
+  }
+  .op-custom .wrapper {
+    padding-bottom: 0;
+  }
+  .pageContentColLeft h1 {
+    font-size: 24px;
+  }
   .form-actions,
   .mainBannerHolder {
     display: none;
