@@ -85,7 +85,7 @@ $('#edit-submitted-guestNum').on('change', function(e) {
             dateFormat: 'dd/mm/yy',
             onSelect: function(date) {
               $('#edit-submitted-dateVisit-input').val(date);
-              $('#calendar-section').hide();
+              // $('#calendar-section').hide();
               apiDateVisit = date.replace(/\//g, '-');
             },
             // filter available dates to be selectable
@@ -157,7 +157,7 @@ $form.submit(function(e) {
   });
 
   // ticket code length
-  $form.find('.guest-ticket-info input.form-text').not('.d-none').each(function(i, e) {
+  $form.find('.guest-ticket-info .guest-code input.form-text').not('.d-none').each(function(i, e) {
     var $e = $(e);
     var currentOption = $e.closest('.form-item').prev('.webform-component').find('input:checked').val();
     var fieldset = [$e, $e.closest('.form-item')];
@@ -185,6 +185,7 @@ $form.submit(function(e) {
       }
     } else {
       // general ticket validation
+      console.log(e)
       var hasError = e.value.length < 4 || (currentOption == 'others' && (isNaN(e.value) || Number(e.value) < 1900 || Number(e.value) > new Date().getFullYear()));
       $(fieldset).toggleClass('error', hasError);
       $e.closest('.form-item').find('.message').addClass('d-none');
@@ -224,7 +225,13 @@ $form.submit(function(e) {
 
 });
 
-// enable and disable ticke code based on ticket type
+$('.op-custom #edit-submitted-contactNumber').on('keyup', function(e) {
+  if (this.value.length > 8) {
+    this.value = this.value.slice(0, 8);
+  }
+});
+
+// enable and disable ticket code based on ticket type
 $('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click', function(e) {
   var currentOption = this.value;
   var codeInputElement = registrationForm[this.getAttribute('name') + 'Code'];
@@ -242,8 +249,16 @@ $('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click'
   });
 });
 
-// only accept alpahnumeric for ticket code and length
-$('.op-custom .guest-ticket-info-section').delegate('input[type=text]', 'keyup', function(e) {
+// only accept alphabetic for name
+$('.op-custom .guest-ticket-info-section').delegate('.guest-name input[type=text]', 'keyup', function(e) {
+  console.log(this.value);
+  if (this.value.match(/[^a-zA-Z]/g)) {
+    this.value = this.value.replace(/[^a-zA-Z]/g, '');
+  }
+});
+
+// only accept alphanumeric for ticket code and length
+$('.op-custom .guest-ticket-info-section').delegate('.guest-code input[type=text]', 'keyup', function(e) {
   var maxlength = isSmartFunPage ? 16 : 4;
   var option = $(this).closest('.form-item').prev('.webform-component').find('input:checked').val();
   if (!isSmartFunPage && option == 'others' && this.value.match(/[^0-9]/g) != null) {
