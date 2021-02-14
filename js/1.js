@@ -185,13 +185,17 @@ $form.submit(function(e) {
       }
     } else {
       // general ticket validation
-      console.log(e)
       var hasError = e.value.length < 4 || (currentOption == 'others' && (isNaN(e.value) || Number(e.value) < 1900 || Number(e.value) > new Date().getFullYear()));
       $(fieldset).toggleClass('error', hasError);
       $e.closest('.form-item').find('.message').addClass('d-none');
       $e.closest('.form-item').find('.message' + (currentOption == 'generalTickets' ? '.empty-err' : '.year-err')).removeClass('d-none');
     }
   });
+
+  // contact number validation
+  if (registrationForm.contactNumber.value.length < 8) {
+    $([registrationForm.contactNumber, registrationForm.contactNumber.parentNode]).addClass('error');
+  }
 
   // email verification
   if (!validEmail(registrationForm.email.value)) {
@@ -261,7 +265,6 @@ $('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click'
 
 // only accept alphanumeric for ticket code and length
 $('.op-custom .guest-ticket-info-section').delegate('.guest-code input[type=text]', 'keyup', function(e) {
-  console.log('guest code');
   var maxlength = isSmartFunPage ? 16 : 4;
   var option = $(this).closest('.form-item').prev('.webform-component').find('input:checked').val();
   if (!isSmartFunPage && option == 'others' && this.value.match(/[^0-9]/g) != null) {

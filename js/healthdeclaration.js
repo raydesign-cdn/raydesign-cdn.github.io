@@ -20,7 +20,6 @@ var renderCalendar = function() {
       var dateSelected = $('#edit-submitted-dateVisit-input').val();
       var compareDateString = $.datepicker.formatDate('dd/mm/yy', date);
       var isSelected = compareDateString === dateSelected ? 'ui-state-selected' : '';
-      isSelected ? console.log(dateSelected) : '';
       return [true,  isSelected];
     }
     // beforeShowDay: function(date) {
@@ -127,8 +126,10 @@ $form.submit(function(e) {
     $form.find('.captcha').toggleClass('error', v.length == 0);
   }
 
-  // no. of guests and visit date cross check
-  // $(registrationForm.dateVisit).toggleClass('error', registrationForm.guestNum.value > 5 && registrationForm.dateVisit.value === '06/01/2020');
+  // contact number validation
+  if (registrationForm.contactNumber.value.length < 8) {
+    $([registrationForm.contactNumber, registrationForm.contactNumber.parentNode]).addClass('error');
+  }
 
   // stop here if any error found
   var inputErrors = $form.find(':input.error').not('.d-none, .g-recaptcha-response').length;
