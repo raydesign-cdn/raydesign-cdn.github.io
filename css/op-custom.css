@@ -195,6 +195,7 @@ body {font-size: 14px; } body.defaultBrowser .headerContainer, body.defaultBrows
 .op-custom.noTicket .page-webform .guest-name a,
 .op-custom.noTicket .page-webform .guest-code a {
   color: #1FB3A0;
+  margin-left: .5rem;
 }
 .op-custom.smartFun .page-webform .guest-name a,
 .op-custom.smartFun .page-webform .guest-code a {
@@ -714,14 +715,14 @@ input[type=number] {
 }
 
 /* health declaration form */
-#health-declaration .webform-component--visitor1,
-#health-declaration .webform-component--visitor2,
-#health-declaration .webform-component--visitor3 {
+#health-declaration .webform-component--guest1,
+#health-declaration .webform-component--guest2,
+#health-declaration .webform-component--guest3 {
   display: flex;
   align-items: flex-end;
   margin-top: 40px;
 }
-#health-declaration [for*="edit-submitted-visitor"] {
+#health-declaration [for*="edit-submitted-guest"] {
   margin-bottom: 0;
   margin-right: 5px;
 }
@@ -862,7 +863,7 @@ input[type=number] {
   .pageContentColLeft h1 {
     font-size: 24px;
   }
-  .form-actions,
+  [type="submit"],
   .mainBannerHolder {
     display: none;
   }
