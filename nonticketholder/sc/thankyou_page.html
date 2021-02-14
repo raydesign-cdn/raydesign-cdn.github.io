@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html class="op-custom smartFun" xmlns="http://www.w3.org/1999/xhtml" data-country="HK" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+<html class="op-custom noTicket" xmlns="http://www.w3.org/1999/xhtml" data-country="HK" xml:lang="zh-hans" version="XHTML+RDFa 1.0" dir="ltr"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
   xmlns:dc="http://purl.org/dc/terms/"
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
@@ -13,7 +13,7 @@
   xmlns:book="http://ogp.me/ns/book#"
   xmlns:profile="http://ogp.me/ns/profile#"
   xmlns:video="http://ogp.me/ns/video#"
-  xmlns:product="http://ogp.me/ns/product#" lang="en">
+  xmlns:product="http://ogp.me/ns/product#" lang="zh-hans">
   <head profile="http://www.w3.org/1999/xhtml/vocab">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -35,7 +35,6 @@
     <script type="text/javascript" src="/js/jquery-ui-1.10.4.min.js"></script>
     <!-- op-custom -->
     <link type="text/css" rel="stylesheet" href="/css/op-custom.css" media="all" />
-
     <!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N7XB72"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -48,6 +47,12 @@
   </head>
   <body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-5494 node-type-page i18n-en defaultBrowser">
     <div class="topnav">
+    <!--
+      <ul class="language-switcher-locale-url">
+        <li class="zh-hant first"><a href="/tc/1.html" class="language-link" xml:lang="zh-hant">繁体</a></li>
+        <li class="zh-hans"><a href="/sc/1.html" class="language-link" xml:lang="zh-hans">简体</a></li>
+      </ul>
+    -->
     </div>
     <div class="headerContainer">
       <a href="/en" title="Home" rel="home" id="logo_op">
@@ -61,8 +66,8 @@
           <div class="alignCenter sliderPagerContainer"></div>
           <div class="slider">
             <div class="slide">
-              <div class="mainBanner"><img src="/img/smartFun.jpg" title="Ocean Park Hong Kong Best Theme Park" alt="Ocean Park Hong Kong Best Theme Park" style="display:inline;"></div>
-              <div class="mainMobileBanner"><img src="/img/smartFun_mobile.jpg" title="Ocean Park Hong Kong Best Theme Park" alt="Ocean Park Hong Kong Best Theme Park"></div>
+              <div class="mainBanner"><img src="/img/noTicket.jpg" title="Ocean Park Hong Kong Best Theme Park Restaurant" alt="Ocean Park Hong Kong Best Theme Park Restaurant" style="display:inline;"></div>
+              <div class="mainMobileBanner"><img src="/img/noTicket_mobile.jpg" title="Ocean Park Hong Kong Best Theme Park Restaurant" alt="Ocean Park Hong Kong Best Theme Park Restaurant"></div>
             </div>
           </div>
         </div>
@@ -70,42 +75,52 @@
           <div class="contentInner">
             <div class="pageAssist clearfix">
               <div class="message">
-                <div class="icon"><img src="/img/icon_wolf.png" alt=""></div>
+                <div class="icon"><img src="/img/icon_penguin.png" alt=""></div>
+                <!--
+                <div class="text">
+                  <div class="textInner">Explore what Ocean Park is all about.</div>
+                </div>
+                -->
               </div>
             </div>
             <div class="pageContent">
               <div class="row pageContentRow clearfix">
                 <div class="pageContentColLeft thank-you">
                   <div id="success">
-                    <h1 class="text-theme text-center mt-1">Thank You</h1>
-                    <p style="font-size:1.2em">Your reservation is successful. Please save this screenshot for admission. Your registered information will also be sent to the below email address:</p>
-                    <p class="email text-theme" style="font-size:1.2em"><strong id="email">abc@abc.com</strong></p>
-                    <p class="registration-no-row mb-0" style="font-size:1.2em"><strong>Reservation Number: <span id="registration-no">bcd12345677</span></strong></p>
+                    <h1 class="text-theme text-center mt-1">多谢</h1>
+                    <p style="font-size:1.2em">你已成功预约，请储存此萤幕截图作入场之用。你所登记的资料亦会传送至下列电邮：</p>
+                    <p class="email text-theme" style="font-size:1.2em"><strong id="email"></strong></p>
+                    <p class="registration-no-row mb-0" style="font-size:1.2em"><strong>预约号码： <span id="registration-no"></span></strong></p>
                     <div>
                       <img id="qr-code" src="/img/qrcode.png">
                     </div>
-                    <p>Please note that any unauthorised resale of Ocean Park admission tickets or reservation QR codes is prohibited by the Ocean Park.</p>
+                    <p>请注意海洋公园禁止未经授权转售海洋公园门票或预约二维码。</p>
                     <table class="mx-auto" border="0" cellpadding="0">
                       <tbody>
                         <tr>
-                          <td>Date of Visit (DD/MM/YYYY)</td>
-                          <td class="colon">:</td>
-                          <td id="date-visit">06/07/2020</td>
+                          <td>入园日期 (日/月/年)</td>
+                          <td class="colon">：</td>
+                          <td id="date-visit"></td>
                         </tr>
                         <tr>
-                          <td>Number of Guest</td>
-                          <td class="colon">:</td>
-                          <td id="guests-num">3</td>
+                          <td>人数</td>
+                          <td class="colon">：</td>
+                          <td id="guests-num"></td>
                         </tr>
                         <tr id="guest-0">
-                          <td>Ticket Type/No.</td>
-                          <td class="colon">:</td>
-                          <td class="guest-ticket">SmartFun Ticket 123467890<br>SmartFun Ticket 123467890<br>SmartFun Ticket 123467890</td>
+                          <td>游客姓名</td>
+                          <td class="colon">：</td>
+                          <td class="guest-ticket"></td>
+                        </tr>
+                        <tr>
+                          <td>联络电话</td>
+                          <td class="colon">：</td>
+                          <td id="contact-no"></td>
                         </tr>
                       </tbody>
                     </table>
                     <p class="mt-3 mb-1">
-                      Please be reminded that both the reservation QR code and registered SmartFun Annual Pass or Unlimited Entry Pass must be presented upon entry.  As the reservation QR code is only valid for one-time entry on the registered date, all registrants must enter the park at the same time.  If you have any enquiry, please contact the park’s Guest Relations team at <span class="text-theme">(852) 3923 2323</span> from 9am to 6pm.
+                      請注意：入園時必須出示預約二維碼及身份證明文件。此二維碼只限指定的入園日期使用，並只可使用一次，所有登記人士必須一同進場。如有任何查詢，請於早上9時至晚上6時致電<span class="text-theme">（852）3923 2323</span>與遊客服務部聯絡。
                     </p>
                   </div>
                 </div>
@@ -121,12 +136,11 @@
             <img src="/img/footer_img_nature.jpg" class="nature" alt="Connect people with nature" />
           </div>
           <div class="lower">
-            <div class="nav"><a class="" href="/en/contact-us" target="_self">Contact Us</a><span class="divider">|</span><a class="" href="http://careers.oceanpark.com.hk" target="_">Careers</a><span class="divider">|</span><a class="" href="/en/press-release" target="_self">Press Release</a><span class="divider">|</span><a class="" href="/en/corporate-information" target="_self">Corporate Information</a><span class="divider">|</span><a class="" href="/en/corporate-policy" target="_self">Corporate Policy</a><span class="divider">|</span><a class="" href="/en/park-rules-and-regulations" target="_self">Park Rules and Regulations</a><span class="divider">|</span><a class="" href="/en/sustainability" target="_self">Sustainability</a></div>
-            <div class="entity entity-bean bean-general-html-content clearfix" about="/en/block/footer-content" typeof="">
+            <div class="nav"><a class="" href="/sc/contact-us" target="_self">联络我们</a><span class="divider">|</span><a class="" href="http://careers.oceanpark.com.hk/tc" target="_">人才招聘</a><span class="divider">|</span><a class="" href="/sc/press-release" target="_self">新闻公报</a><span class="divider">|</span><a class="" href="/sc/corporate-information" target="_self">公司资料</a><span class="divider">|</span><a class="" href="/sc/corporate-policy" target="_self">公司政策</a><span class="divider">|</span><a class="" href="/sc/park-rules-and-regulations" target="_self">公园守则</a><span class="divider">|</span><a class="" href="/sc/sustainability" target="_self">可持续发展资讯</a></div>
+            <div class="entity entity-bean bean-general-html-content clearfix" about="/sc/block/footer-content" typeof="">
               <div class="content">
-                <div class="footer_content">
-                  Ocean Park Hong Kong, 180 Wong Chuk Hang Road, Aberdeen, Hong Kong <span class="footer_tel">Tel: (852) 3923 2323</span> <span class="footer_fax">Fax: (852) 2873 5584</span>
-                  <div>© Copyright Ocean Park Hong Kong. All rights reserved.</div>
+                <div class="footer_content"><span class="footer_address">香港海洋公园 香港仔黄竹坑道一百八十号 </span> <span class="footer_tel">电话：(852) 3923 2323</span> <span class="footer_fax">传真：(852) 2873 5584</span>
+                  <div>© 香港海洋公园版权所有</div>
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html class="op-custom smartFun" xmlns="http://www.w3.org/1999/xhtml" data-country="HK" xml:lang="zh-hans" version="XHTML+RDFa 1.0" dir="ltr"
+<html class="op-custom noTicket" xmlns="http://www.w3.org/1999/xhtml" data-country="HK" xml:lang="zh-hans" version="XHTML+RDFa 1.0" dir="ltr"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
   xmlns:dc="http://purl.org/dc/terms/"
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
@@ -52,8 +52,8 @@
   <body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-5494 node-type-page i18n-en overflow-hidden defaultBrowser">
     <div class="topnav">
       <ul class="language-switcher-locale-url">
-        <li class="en first"><a href="/smartfun/en/" class="language-link" xml:lang="en">EN</a></li>
-        <li class="zh-hant"><a href="/smartfun/tc/" class="language-link" xml:lang="zh-hant">繁體</a></li>
+        <li class="en first"><a href="../en/" class="language-link" xml:lang="en">EN</a></li>
+        <li class="zh-hant"><a href="../tc/" class="language-link" xml:lang="zh-hant">繁體</a></li>
       </ul>
     </div>
     <div class="headerContainer">
@@ -68,8 +68,8 @@
           <div class="alignCenter sliderPagerContainer"></div>
           <div class="slider">
             <div class="slide">
-              <div class="mainBanner"><img src="/img/smartFun.jpg" title="Ocean Park Hong Kong Best Theme Park Restaurant" alt="Ocean Park Hong Kong Best Theme Park Restaurant" style="display:inline;"></div>
-              <div class="mainMobileBanner"><img src="/img/smartFun_mobile.jpg" title="Ocean Park Hong Kong Best Theme Park Restaurant" alt="Ocean Park Hong Kong Best Theme Park Restaurant"></div>
+              <div class="mainBanner"><img src="/img/noTicket.jpg" title="Ocean Park Hong Kong Best Theme Park Restaurant" alt="Ocean Park Hong Kong Best Theme Park Restaurant" style="display:inline;"></div>
+              <div class="mainMobileBanner"><img src="/img/noTicket_mobile.jpg" title="Ocean Park Hong Kong Best Theme Park Restaurant" alt="Ocean Park Hong Kong Best Theme Park Restaurant"></div>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
           <div class="contentInner">
             <div class="pageAssist clearfix">
               <div class="message">
-                <div class="icon"><img src="/img/icon_wolf.png" alt=""></div>
+                <div class="icon"><img src="/img/icon_penguin.png" alt=""></div>
                 <div class="text">
                   <!--<div class="textInner">Explore what Ocean Park is all about.</div>-->
                 </div>
@@ -87,8 +87,10 @@
               <div class="row pageContentRow clearfix">
                 <div class="pageContentColLeft">
                   <!-- Title -->
-                  <h1 class="text-theme">网上预约 - 智纷会员 / 无限次入场证持证人</h1>
-                  <p id="notice">请注意：凡持有指定日子的入埸门票或活动门票之游客，无须再进行网上预约入园, 但请留意在到访日须在进场前填写健康申报表。</p>
+                  <h1 class="text-theme">网上预约 - 生日／福利门票或礼券换领／稍后购票</h1>
+                  <p id="notice">
+                    请注意：凡持有指定日子的入埸门票或活动门票之游客，无须再进行网上预约入园, 但请留意在到访日须在进场前填写健康申报表。
+                  </p>
                   <div class="page-webform">
                     <div id="webform-ajax-wrapper-5494">
                       <form name="registrationForm" class="webform-client-form" enctype="multipart/form-data" action="" accept-charset="UTF-8" novalidate>
@@ -114,23 +116,24 @@
                           <div class="guest-ticket-info">
                             <label>登记人 @{guestNum} <span class="form-required" title="This field is required."></span></label>
                             <div class="webform-component webform-component-textfield webform-component--guestTicket">
-                              <div class="radio">
-                                <input type="radio" id="edit-submitted-guest@{guestNum}-smartfun-pass" name="guest@{guestNum}Ticket" value="smartfunPass" checked />
-                                <label for="edit-submitted-guest@{guestNum}-smartfun-pass"><strong>智纷全年入场证会员或无限次入场证持证人</strong></label>
+                              <div class="radio d-none">
+                                <input type="radio" id="edit-submitted-guest@{guestNum}-others" name="guest@{guestNum}Ticket" value="others" data-codevalue="无需填写" checked />
+                                <label for="edit-submitted-guest@{guestNum}-others"><strong>生日／福利门票或礼券换领／稍后购票</strong></label>
                               </div>
                             </div>
-                            <div class="form-item webform-component webform-component-textfield webform-component--guest@{guestNum}Code guest-code">
+                            <div class="form-item webform-component webform-component-textfield webform-component--guest@{guestNum}Code guest-name">
                               <div class="guest-code-row">
-                                <label class="mb-0" for="edit-submitted-guest@{guestNum}Code">请输入智纷全年入场证或无限次入场证条码号码</label>
+                                <label class="mb-0" for="edit-submitted-guest@{guestNum}Name">
+                                  <span class="guest-code-label" for="others">
+                                    请输入身份证上的名字
+                                  </span>
+                                </label>
                                 <div class="guest-code-input-row">
-                                  <input required="required" type="text" id="edit-submitted-guest@{guestNum}-code" name="guest@{guestNum}TicketCode" value="" size="60" maxlength="16" class="form-text required" autocomplete="off" />
+                                  <input required="required" type="text" id="edit-submitted-guest@{guestNum}-name" name="guest@{guestNum}TicketName" value="" size="60" maxlength="50" class="form-text required" autocomplete="off" />
+                                  <a href="https://ticketing.oceanpark.com.hk/oceanpark/b2c/index.cfm/change.language/lang/zh-CN" target="_blank">购票</a>
                                 </div>
                               </div>
-                              <div class="message d-none pl-0 len-err">请输入智纷全年入场证或无限次入场证条码号码</div>
-                              <div class="message d-none pl-0 expired">请选择智纷全年入场证或无限次入场证到期日之前的入园日期</div>
-                              <div class="message d-none pl-0 invalid">输入错误，请重新输入正确的智纷全年入场证或无限次入场证条码号码</div>
-                              <div class="message d-none pl-0 sys-err">验证失败, 请尝试重新输入或联络我们</div>
-                              <div class="message d-none pl-0 duplicated">每个智纷全年入场证或无限次入场证条码号码在同一预约或入园日期内只能使用一次。</div>
+                              <div class="message pl-0 year-err">请输入身份证上的名字</div>
                             </div>
                           </div>
                         </script>
@@ -151,17 +154,7 @@
                         </div>  <!-- /#calendar-section -->
 
                         <div class="guest-ticket-info-section" style="display: none;">
-                          <p id="sample-tickets-desc">请参考下列红色方格有关智纷全年入场证或无限次入场证条码号码的位置</p>
-                          <div id="sample-tickets">
-                            <div class="sample-ticket">
-                              <img src="/img/sample.jpg">
-                              <div class="text-center">您的智纷全年入场证条码</div>
-                            </div>
-                            <div class="sample-ticket">
-                              <img src="/img/sample2.jpg">
-                              <div class="text-center">您的无限次入场证条码号码</div>
-                            </div>
-                          </div>
+                          <!-- <h3 class="text-theme">门票类别</h3> -->
                           <div class="guest-ticket-info-group"></div>
                         </div>  <!-- /.guest-ticket-info-section -->
 
@@ -176,6 +169,11 @@
                             <label for="edit-submitted-reinputEmail">确认电邮地址 <span class="form-required" title="This field is required."></span></label>
                             <input required="required" type="text" id="edit-submitted-reinputEmail" name="reinputEmail" value="" size="60" maxlength="128" class="form-text required" autocomplete="off" />
                             <div class="message">请确认电邮地址</div>
+                          </div>
+                          <div class="form-item webform-component webform-component-textfield webform-component--contactNumber">
+                            <label for="edit-submitted-contactNumber">联络电话<span class="form-required" title="This field is required."></span></label>
+                            <input required="required" type="number" id="edit-submitted-contactNumber" name="contactNumber" value="" size="60" maxlength="8" class="form-text required" autocomplete="off" />
+                            <div class="message">请输入联络电话</div>
                           </div>
                         </div>
 
@@ -242,45 +240,44 @@
     </div> <!-- /.wrapper -->
     <div class="dialog">
       <div class="content">
-        <div class="tabs" active="#smartFun">
+        <div class="tabs" active="#noTicket">
           <a href="/ticketholder/sc/" data-tab="#general"><strong>门票持有人</strong></a>
-          <a href="/nonticketholder/sc/" data-tab="#noTicket"><strong>生日／福利门票或礼券换领／稍后购票</strong></a>
-          <a class="active" href="#" data-tab="#smartFun"><strong>智纷会员／无限次入场证持证人</strong></a>
+          <a href="index.html" class="active" data-tab="#noTicket"><strong>生日／福利门票或礼券换领／稍后购票</strong></a>
+          <a href="/smartfun/sc/" data-tab="#smartFun"><strong>智纷会员／无限次入场证持证人</strong></a>
         </div>
-        <div id="smartFun" class="tab">
+        <div id="noTicket" class="tab">
           <p class="mt-1">
             因应海洋公园重新开放后的措施，游客请注意以下新安排：
           </p>
           <ol>
-            <li>海洋公园预约系统会于每天下午5:00开放未来14天的名额供访客预约，所有访客须于系统内预约入园日期及作健康申报，每日名额有限，额满即止。入园时须出示预约二维码、用作登记之入场证及身份证明文件方可进场。 请注意海洋公园禁止未经授权转售海洋公园门票或预约二维码。</li>
+            <li>海洋公园预约系统会于每天下午5:00开放未来14天的名额供访客预约，所有访客须于系统内预约入园日期及作健康申报，每日名额有限，额满即止。入园时须出示预约二维码及身份证明文件方可进场。请注意海洋公园禁止未经授权转售海洋公园门票或预约二维码。</li>
             <li>公园会执行政府《预防及控制疾病条例》（第599章）所订立之规例，包括：<br>
-                (i) 游客入园前必须佩戴口罩和量度体温。<br>
-                (ii) 游客如没有提供健康申报，必须于入园前利用手机扫描「安心出行」二维码。<br>
-                (iii) 游客于园内任何范围必须佩戴口罩（用餐时除外）。 <br>
-                (iv) 公园整体及个别机动游戏和设施的容客量均会相应调整，所有剧场亦采取特定入座措施。<br>
-                (v) 园内所有餐厅的每张餐桌之间保持1.5米距离。</li>
+              (i) 游客入园前必须佩戴口罩和量度体温。 <br>
+              (ii) 游客如没有提供健康申报，必须于入园前利用手机扫描「安心出行」二维码。<br>
+              (iii) 游客于园内任何范围必须佩戴口罩（用餐时除外）。<br>
+              (iv) 公园整体及个别机动游戏和设施的容客量均会相应调整，所有剧场亦采取特定入座措施。<br>
+              (v) 园內所有餐厅的每张餐桌之间保持1.5米距离。</li>
             <li>游客如身体不适或出现2019冠状病毒病征如发烧（>=38°C）、咳嗽、喉咙痛或气促等，应马上求医并留在家中休息。海洋公园有权拒绝出现病征的游客入园。</li>
             <li>游客如有同住的家人或朋友出现2019冠状病毒病征亦不应入园。</li>
           </ol>
-          <br>
-          <p class="mb-0"><strong>网上预约程序</strong></p>
-          <ol>
-            <li>所有智纷全年入场证会员及无限次入场证持证人均须于网上预约入园，豁免人士除外。</li>
-            <li>以下人士可获豁免：<br>
-                (i) 65岁或以上本港居民<br>
-                (ii) 65岁或以上本港居民携同之不多于两位3-11岁小童<br>
-                (iii) 3岁以下小童<br>
-                (iv) 持有香港政府卫生褔利及食物局签发的「残疾人士登记证」之游客</li>
-            <li>每次登记人数最多4人，所有登记人士必须为智纷全年入场证会员或无限次入场证持证人，而同一入场日期只可登记一次，每日名额有限，额满即止。</li>
-            <li>登记时须填写智纷全年入场证或无限次入场证条码，以及一个有效的电邮地址及联络电话。</li>
-            <li>成功预约人士会即时收到预约二维码及电邮通知，入园时须同时出示预约二维码及登记之智纷全年入场证或无限次入场证。二维码只限指定的入园日期使用，并只可使用一次，所有登记人士必须一同进场。</li>
-            <li>预约完成后，已登记的资料不能修改。</li>
-            <li>海洋公园有权因应天气或实际情况更改入场安排而不作另行通知，如受影响游客未能入场，其预约二维码亦会视为失效，游客须另行预约。</li>
-            <li>预约时收集的资料仅用于执行预防及控制疾病的相关措施。公园有权在必要时使用收集的资料处理相关事宜。有关收集个人资料声明，请<a href="https://www.oceanpark.com.hk/sc/corporate-policy/privacy-policy-statement" target="_blank" class="text-theme">按此</a>。</li>
-            <li>如有任何查询，请于早上9时至晚上6时致电（852）3923 2323与游客服务部联络。</li>
-          </ol>
-          <a class="close" href="#">×</a>
-        </div>
+         <br>
+         <p class="mb-0"><strong>网上预约程序</strong></p>
+         <ol>
+          <li>所有游客均须于网上预约入园，豁免人士除外。</li>
+          <li>以下人士可获豁免：<br>
+              (i) 65岁或以上本港居民<br>
+              (ii) 65岁或以上本港居民携同之不多于两位3-11岁小童<br>
+              (iii) 3岁以下小童<br>
+              (iv) 持有香港政府卫生褔利及食物局签发的「残疾人士登记证」之游客</li>
+          <li>每次登记人数最多4人，每日名额有限，额满即止。</li>
+          <li>登记时须填写身份证上的名字以供现场核对身份之用，以及一个有效的电邮地址及联络电话。</li>
+          <li>成功预约人士会即时收到预约二维码及电邮通知，入园时须同时出示预约二维码及身份证明文件。二维码只限指定的入园日期使用，并只可使用一次，所有登记人士必须一同进场。</li>
+          <li>预约完成后，已登记的资料不能修改。</li>
+          <li>海洋公园有权因应天气或实际情况更改入场安排而不作另行通知，如受影响游客未能入场，其预约二维码也会视为失效，游客须另行预约。</li>
+          <li>预约时收集的资料仅用於执行预防及控制疾病的相关措施。公园有权在必要时使用收集的资料处理任何相关事宜。有关收集个人资料声明，请<a href="https://www.oceanpark.com.hk/sc/corporate-policy/privacy-policy-statement" target="_blank" class="text-theme">按此</a>。</li>
+          <li>如有任何查询，请于早上9时至晚上6时致电（852）3923 2323与游客服务部联络。</li>
+         </ol>
+        <a class="close" href="#">×</a>
       </div>
     </div>
     <script src="/js/1.js"></script>
