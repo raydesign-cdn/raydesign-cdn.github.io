@@ -225,6 +225,7 @@ $form.submit(function(e) {
 
 });
 
+// max. length of contact number is 8
 $('.op-custom #edit-submitted-contactNumber').on('keyup', function(e) {
   if (this.value.length > 8) {
     this.value = this.value.slice(0, 8);
@@ -249,16 +250,18 @@ $('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click'
   });
 });
 
-// only accept alphabetic for name
-$('.op-custom .guest-ticket-info-section').delegate('.guest-name input[type=text]', 'keyup', function(e) {
-  console.log(this.value);
-  if (this.value.match(/[^a-zA-Z]/g)) {
-    this.value = this.value.replace(/[^a-zA-Z]/g, '');
-  }
-});
+// only accept alphabetic for name in English only
+// if ($('html').attr('lang') === 'en') {
+//   $('.op-custom .guest-ticket-info-section').delegate('.guest-name input[type=text]', 'keyup', function(e) {
+//     if (this.value.match(/[^a-zA-Z]/g)) {
+//       this.value = this.value.replace(/[^a-zA-Z]/g, '');
+//     }
+//   });
+// }
 
 // only accept alphanumeric for ticket code and length
 $('.op-custom .guest-ticket-info-section').delegate('.guest-code input[type=text]', 'keyup', function(e) {
+  console.log('guest code');
   var maxlength = isSmartFunPage ? 16 : 4;
   var option = $(this).closest('.form-item').prev('.webform-component').find('input:checked').val();
   if (!isSmartFunPage && option == 'others' && this.value.match(/[^0-9]/g) != null) {

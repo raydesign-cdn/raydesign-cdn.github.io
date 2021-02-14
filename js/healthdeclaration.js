@@ -145,37 +145,18 @@ $form.submit(function(e) {
 
 });
 
-// enable and disable ticke code based on ticket type
-$('.op-custom .guest-ticket-info-section').delegate('input[type=radio]', 'click', function(e) {
-  var currentOption = this.value;
-  var codeInputElement = registrationForm[this.getAttribute('name') + 'Code'];
-  if (/buyTickets/.test(currentOption)) {
-    $(codeInputElement).val($(this).data('codevalue'));
-    $(codeInputElement).attr('disabled', true);
-  } else {
-    $(codeInputElement).val('');
-    $(codeInputElement).removeAttr('disabled');
+// max. length of contact number is 8
+$('.op-custom #edit-submitted-contactNumber').on('keyup', function(e) {
+  if (this.value.length > 8) {
+    this.value = this.value.slice(0, 8);
   }
-  // show corresponding label for input
-  $(this).closest('.guest-ticket-info').find('.guest-code-label').each(function(i, el) {
-    var forOption = $(el).attr('for');
-    $(el).toggleClass('d-none', currentOption != forOption);
-  });
 });
 
-// only accept alpahnumeric for ticket code and length
-$('.op-custom .guest-ticket-info-section').delegate('input[type=text]', 'keyup', function(e) {
-  var maxlength = isSmartFunPage ? 16 : 4;
-  var option = $(this).closest('.form-item').prev('.webform-component').find('input:checked').val();
-  if (!isSmartFunPage && option == 'others' && this.value.match(/[^0-9]/g) != null) {
-    this.value = this.value.replace(/[^0-9]/g, '');
-  } else if (this.value.match(/[^a-zA-Z0-9]/g)) {
-    this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
-  }
-  if (this.value.length > maxlength) {
-    this.value = this.value.slice(0, maxlength);
-  }
-  if (isSmartFunPage) {
-    this.value = this.value.toUpperCase();
-  }
-});
+// only accept alphabetic for name in English only
+// if ($('html').attr('lang') === 'en') {
+//   $('.op-custom input[id*=guest], .op-custom #edit-submitted-name').on('keyup', function(e) {
+//     if (this.value.match(/[^a-zA-Z]/g)) {
+//       this.value = this.value.replace(/[^a-zA-Z]/g, '');
+//     }
+//   });
+// }
