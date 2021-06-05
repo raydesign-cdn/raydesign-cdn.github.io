@@ -85,7 +85,7 @@ $('#edit-submitted-guestNum').on('change', function(e) {
             dateFormat: 'dd/mm/yy',
             onSelect: function(date) {
               $('#edit-submitted-dateVisit-input').val(date);
-              // $('#calendar-section').hide();
+              $('#calendar-section').hide();
               apiDateVisit = date.replace(/\//g, '-');
             },
             // filter available dates to be selectable
@@ -151,7 +151,7 @@ $form.submit(function(e) {
 
   // validation
   // must not empty for required fields
-  $form.find(':input').not('.d-none').each(function(i, e) {
+  $form.find(':input[required]').not('.d-none').each(function(i, e) {
     var $e = $(e);
     $([$e, $e.closest('.form-item')]).toggleClass('error', $e.hasClass('form-checkbox') ? !e.checked : e.value === '');
   });
@@ -217,7 +217,7 @@ $form.submit(function(e) {
   // stop here if any error found
   var inputErrors = $form.find(':input.error').not('.d-none, .g-recaptcha-response').length;
   if (inputErrors || $('.captcha.error').length) {
-    // not to show message if just recaptcha fail
+  // not to show message if just recaptcha fail
     $('.form-actions .message').toggleClass('d-none', inputErrors === 0);
     return false;
   }
