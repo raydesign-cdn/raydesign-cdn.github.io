@@ -1,5 +1,6 @@
 var isSmartFunPage = $('html.op-custom.smartFun').length > 0;
-var apiPrefix = isSmartFunPage ? 'sf-' : '';
+var isNoTicketPage = $('html.op-custom.noTicket').length > 0;
+var apiPrefix = isSmartFunPage ? 'sf-' : (isNoTicketPage ? 'nt-' :'');
 var apiDateVisit = '';
 
 function sfValidation(element) {
@@ -277,5 +278,12 @@ $('.op-custom .guest-ticket-info-section').delegate('.guest-code input[type=text
   }
   if (isSmartFunPage) {
     this.value = this.value.toUpperCase();
+  }
+});
+
+// only accept alphabets for name (remove numbers and special chars)
+$('.op-custom .guest-ticket-info-section').delegate('.guest-name input[type=text]', 'keyup', function(e) {
+  if (this.value.match(/[0-9_~`!@#$%\^&*()+=\-\[\]\\';,/{}|\\":<>\?]/g)) {
+    this.value = this.value.replace(/[0-9_~`!@#$%\^&*()+=\-\[\]\\';,/{}|\\":<>\?]/g, '');
   }
 });
