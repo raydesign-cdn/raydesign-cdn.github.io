@@ -3,7 +3,7 @@ var origin = isDebug ? 'http://localhost:8080' : 'https://raydesign-cdn.github.i
 var Tool = {
   jsLibs: {
     jQuery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js',
-    editor: origin + '/js/editor.js'
+    editor: 'editor.js'
     // editor: 'https://mycdn-c5756.firebaseapp.com/js/editor.js'
   },
   isEditing: false,
