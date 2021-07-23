@@ -785,7 +785,7 @@
       // "http://mycdn.html-5.me/editor/js/search.js",
       // "http://portal3auat.hktdc.com/raylui/editor/js/search.js",
       // search.js
-      "https://raydesign-cdn.github.io/js/search.js",
+      "https://raydesign-cdn.github.io/pageTools/search.js",
       "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/addon/comment/comment.min.js",
       "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.37.0/keymap/sublime.min.js",
       // "http://portal3auat.hktdc.com/raylui/editor/js/chiTran.js"
