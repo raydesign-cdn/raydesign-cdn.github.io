@@ -1,5 +1,6 @@
 var isSmallViewport = false;
 var isMediumViewport = false;
+var $stepsEl = null;
 
 (function() {
   'use strict';

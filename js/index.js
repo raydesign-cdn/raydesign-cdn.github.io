@@ -2,7 +2,6 @@ var env = "development";
 var currentStep = 1;
 var maxGuestNum = 4;
 var agreeTnC = false;
-var $stepsEl = null;
 var mode = 'new';
 console.log(env);
 
