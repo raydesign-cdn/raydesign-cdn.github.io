@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sc">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="cache-control, pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>指定日期门票持有人</title>
+    <!-- datepicker-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css">
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <!-- theme css-->
+    <link rel="stylesheet" href="../../css/style.css">
+  </head>
+  <body>
+    <main class="container-fluid">
+      <div class="row">
+        <!-- steps-->
+        <section class="d-none d-lg-block disabled" id="steps">
+          <div id="logo-layer"><img class="img-fluid" src="../../img/logoDesktop.png">
+            <div id="tagline">An All-Weather Water World</div>
+          </div>
+        </section>
+        <section class="col-xs-12" id="form">
+          <!-- step 4 - Thank You-->
+          <div class="form-layer active" id="form-step4">
+            <!-- language switch for tablet and desktop-->
+            <div class="lang-switch"><a href="../en/modify.html">Eng</a><span class="mx-3">|</span><a href="../tc/modify.html">繁體</a>
+            </div>
+            <!-- mobile header-->
+            <header class="d-lg-none">
+              <div style="width:180px;height:50px;"><img class="w-100" src="../../img/logoMobile.png"></div>
+              <div class="lang-switch"><a href="../en/modify.html">Eng</a><span class="mx-3">|</span><a href="../tc/modify.html">繁體</a>
+              </div>
+            </header>
+            <div class="form-step">
+              <div id="artworks-layer"><img src="../../img/artwork1.png">
+              </div>
+              <h1 class="block-space text-blue">您的<span class="text-cyan">预约</span></h1>
+              <div class="text-large font-weight-bold block-space">Your reservation is successful. Please find your registered information as below.</div>
+              <h3 class="text-orange section-title block-space" id="email">abc@mirumagency.com</h3>
+              <hr class="block-space">
+              <div class="w-100 block-space position-relative">
+                <div id="qr-code-layer">
+                  <div id="qr-bg"><img class="w-100 img-fluid" src="../../img/sampleQR.png"></div>
+                </div>
+                <div id="qr-text-layer">
+                  <div class="text-large font-weight-bold">预约号码<br>
+                    <div id="reservation-number">12345654</div>
+                  </div>
+                  <div>请注意海洋公园禁止未经授权转售水上乐园门票或预约二维码。 </div>
+                </div><img class="img-fluid" id="qr-hcard" src="../../img/hcard.png"><img class="img-fluid" id="qr-pcard" src="../../img/pcard.png">
+              </div>
+              <table class="table block-space" id="result-info">
+                <tbody>
+                  <tr>
+                    <td>入园日期<br><small>(日/月/年)</small></td>
+                    <td>15/08/2021</td>
+                  </tr>
+                  <tr>
+                    <td>人数</td>
+                    <td>2 Guests</td>
+                  </tr>
+                  <tr>
+                    <td>门票条码/ 遊客姓名</td>
+                    <td>Dated Ticket Holder<br>1234 5678 4554 4565 6785<br>Tester 1</td>
+                  </tr>
+                  <tr>
+                    <td>联络电话</td>
+                    <td>1234 5678</td>
+                  </tr>
+                  <tr>
+                    <td>已预约之穿梭巴士时段</td>
+                    <td>08:00 AM</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>入园时必须出示预约二维码及身份證明文件。 此二维码只限指定的入园日期使用，并只可使用一次，所有登记人士必须一同进场。如有任何查询，请於早上9时至晚上6时致电（852）3923 2323与遊客服务部联络。</p>
+              <!-- buttons for modify mode-->
+              <div class="row align-items-center mt-5">
+                <div class="col text-right"><a class="btn btn-primary rounded-pill" id="modify" href="" type="button">更改<img class="icon" src="../../img/btnArrow.png"></a></div>
+                <div class="col"><a class="btn btn-primary rounded-pill" href="" type="button" data-toggle="modal" data-target="#confirm-cancel-modal">除消<img class="icon" src="../../img/btnArrow.png"></a></div>
+              </div>
+              <div class="mb-5" id="footer">
+                <hr class="block-space">
+                <p>© 香港海洋公园版权所有</p>
+              </div>
+              <div class="modal fade" id="confirm-cancel-modal" tabindex="-1" aria-labelledby="confirm-cancel-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content" body="confirm-cancel-body">
+                    <!-- confirm cancel message-->
+                    <div class="modal-body text-center" id="confirm-cancel-body">
+                      <h3 class="mt-4 text-blue">除消</h3>
+                      <div class="text-large">确定除消您的预约？</div>
+                      <div class="mb-4"><a class="btn btn-primary rounded-pill" href type="button">是<img class="icon" src="../../img/btnArrow.png"></a><a class="btn btn-primary rounded-pill" href type="button" data-dismiss="modal">否<img class="icon" src="../../img/btnArrow.png"></a></div><a class="modal-close" href data-dismiss="modal" aria-label="Close"><img class="img-fluid" src="../../img/btnClose.png"></a>
+                    </div>
+                    <!-- canceled message-->
+                    <div class="modal-body text-center" id="canceled-body">
+                      <h3 class="mt-3 text-blue">多谢</h3>
+                      <div class="text-large mb-3">您的预约已被除消</div>
+                      <p class="text-left px-3">We will send you the latest issue of our eNews shortly with all the hottest news and views to help you make the most of your time in Hong Kong.<br><br>Let us know if you have any comments: <a href="mailto:info@waterworld.com">info@waterworld.com</a></p>
+                      <div class="mb-3"><a class="btn btn-primary rounded-pill m-0" href="https://www.oceanpark.com.hk/sc" type="button">主页<img class="icon" src="../../img/btnArrow.png"></a></div><a class="modal-close" href data-dismiss="modal" aria-label="Close"><img class="img-fluid" src="../../img/btnClose.png"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+  <!-- bootstrap-->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/modify.js"></script>
+</html>
