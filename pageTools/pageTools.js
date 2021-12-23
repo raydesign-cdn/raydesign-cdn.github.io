@@ -1,4 +1,4 @@
-var isDebug = !location.hostname || location.hostname == 'localhost';
+var isDebug = env == 'dev' || !location.hostname || location.hostname == 'localhost';
 var origin = isDebug ? 'http://localhost:8080' : 'https://raydesign-cdn.github.io';
 var Tool = {
   jsLibs: {
@@ -99,7 +99,7 @@ var Tool = {
     elStyle.appendChild(this.style);
     elToolContainer.innerHTML = this.html;
     document.getElementsByTagName('head')[0].appendChild(elStyle);
-    document.getElementsByTagName('body')[0].appendChild(elToolContainer);
+    document.getElementsByTagName('body')[0].appendChild(elToolContainer.firstElementChild);
     var elTool = document.getElementById('tool');
     var elMenu = document.getElementById('tool-menu');
     var elToolItemExit = document.getElementById('tool-item-exit');
