@@ -202,7 +202,8 @@
 
     let $reposition = $('.contentHolder');  // reposition site
     let $liveStyle = $('.templateContentHolder');  // livestyle site
-    let $body = $('body').children().not('#tool-container').wrapAll('<div id="body" />');
+    $('body').children().not('#tool-container').wrapAll('<div id="body" />');
+    let $body = $('div#body');
     $body.find('script').remove();
 
     // if ($reposition.length == 0 && $liveStyle.length == 0 && $body.length == 0) {
@@ -424,7 +425,6 @@
         // let $liveStyle = $('.templateContentHolder');  // livestyle site
         $contentHolder =
           $liveStyle.length ? $liveStyle : $reposition.length ? $reposition : $body;
-
         let $original = $contentHolder.clone();
         // remove unwanted elements
         $original.find('#hiddenAdsysDiv, #editor-modal, #editor-toggle, #tool-container').remove();
@@ -740,8 +740,6 @@
     // main start to loadd css and js
     // ----------------------------------------------------
     console.log('Libs loading...');
-
-    console.log(Editor.ready);
 
     const CSS_LIBS = {
       fonts: `<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">`,
